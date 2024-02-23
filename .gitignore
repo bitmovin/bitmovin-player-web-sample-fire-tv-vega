@@ -1,0 +1,14 @@
+.tmp
+node_modules
+build
+logs
+generated
+bundle
+assets
+kepler-build
+*.swp
+.vscode
+.idea
+buildinfo.json
+.DS_store
+ExtensionOutput

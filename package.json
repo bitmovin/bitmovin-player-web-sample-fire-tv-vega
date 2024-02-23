@@ -1,0 +1,80 @@
+{
+  "name": "@amzn/bitmovinplayerwebsamplekepler",
+  "version": "0.0.1",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf build bundle kepler-build assets node_modules package-lock.json dist",
+    "build": "npm-run-all compile",
+    "compile": "tsc -p tsconfig-build.json",
+    "test:snapshot": "jest --colors --updateSnapshot",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest --colors",
+    "lint": "eslint src --ext .ts,.tsx && eslint tst --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "@amzn/keplerscript-react-native-safe-area-context": "3.2.0",
+    "@amzn/keplerscript-react-navigation-core": "5.15.3",
+    "@amzn/keplerscript-react-navigation-native": "5.9.4",
+    "@amzn/keplerscript-react-navigation-routers": "5.7.2",
+    "@amzn/keplerscript-react-navigation-stack": "5.14.4",
+    "@amzn/react-native-kepler": "1.0.0+rn0.67.3",
+    "@amzn/react-native-w3cmedia": "1.0.0+rn0.67.3",
+    "base-64": "1.0.0",
+    "bitmovin-player": "8.138.0-beta.5",
+    "react": "^17.0.2",
+    "react-native": "0.67.3",
+    "xmldom": "*"
+  },
+  "devDependencies": {
+    "@amzn/types__react-native": "0.66.15",
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^3.0.1",
+    "@testing-library/react-native": "^7.2.0",
+    "@types/jest": "^26.0.20",
+    "@types/react-test-renderer": "^16.9.2",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "babel-jest": "^26.6.3",
+    "eslint": "^8.12.0",
+    "eslint-plugin-simple-import-sort": "^5.0.3",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.64.0",
+    "mustache": "^4.2.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.6.2",
+    "react-test-renderer": "^17.0.1",
+    "ts-jest": "^26.1.4",
+    "typescript": "^4.5.5"
+  },
+  "overrides": {
+    "@types/react-native": "$@amzn/types__react-native"
+  },
+  "resolutions": {
+    "@types/react": "^17"
+  },
+  "eslintConfig": {
+    "extends": "@react-native-community",
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "root": true
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "bracketSameLine": true,
+    "bracketSpacing": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "kepler": {
+    "projectType": "application",
+    "appName": "bitmovinplayerwebsamplekepler",
+    "targets": [
+      "tv"
+    ],
+    "api": 0.1
+  }
+}

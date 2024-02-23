@@ -1,0 +1,8 @@
+{
+  "//": "The declared app name must follow this pattern to be KRL-compatible",
+  "name": "com.amazon.bitmovinplayerwebsamplekepler.main",
+  "displayName": "Bitmovinplayerwebsamplekepler",
+  "reactNativeAppComponentName": "Bitmovinplayerwebsamplekepler",
+  "appId": "com.amazon.bitmovinplayerwebsamplekepler.main",
+  "windowTitle": "BitmovinPlayerWebSampleKepler"
+}

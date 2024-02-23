@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+/*
+ * Copyright (c) 2022 Amazon.com, Inc. or its affiliates.  All rights reserved.
+ *
+ * PROPRIETARY/CONFIDENTIAL.  USE IS SUBJECT TO LICENSE TERMS.
+ */
+
+exports[`Template App Snapshot tests App screen after button press 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#1A237E",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#303030",
+        "borderColor": "navy",
+        "borderRadius": 10,
+        "borderWidth": 1,
+        "opacity": 1,
+        "paddingHorizontal": 32,
+        "paddingVertical": 12,
+      }
+    }
+    testID="sampleButton"
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Amazon Ember",
+          "fontSize": 22,
+        }
+      }
+    >
+      Change Color
+    </Text>
+  </View>
+  <Text
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 32,
+        "position": "absolute",
+        "right": 32,
+        "top": 32,
+      }
+    }
+  >
+    #1A237E
+  </Text>
+</View>
+`;
+
+exports[`Template App Snapshot tests Initial App screen 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#283593",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#303030",
+        "borderColor": "navy",
+        "borderRadius": 10,
+        "borderWidth": 1,
+        "opacity": 1,
+        "paddingHorizontal": 32,
+        "paddingVertical": 12,
+      }
+    }
+    testID="sampleButton"
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Amazon Ember",
+          "fontSize": 22,
+        }
+      }
+    >
+      Change Color
+    </Text>
+  </View>
+  <Text
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 32,
+        "position": "absolute",
+        "right": 32,
+        "top": 32,
+      }
+    }
+  >
+    #283593
+  </Text>
+</View>
+`;
