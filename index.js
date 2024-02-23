@@ -5,11 +5,11 @@
  */
 
 import { AppRegistry, LogBox } from 'react-native';
-import { ComAmazonBitmovinplayerwebsamplekeplerMain } from './src/App';
+import { App } from './src/App';
 import { name as appName } from './app.json';
 
 // Temporary workaround for problem with nested text
 // not working currently.
 LogBox.ignoreAllLogs();
 
-AppRegistry.registerComponent(appName, () => ComAmazonBitmovinplayerwebsamplekeplerMain);
+AppRegistry.registerComponent(appName, () => App);

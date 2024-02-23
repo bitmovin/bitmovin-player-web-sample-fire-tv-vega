@@ -5,69 +5,48 @@
     "dist"
   ],
   "scripts": {
-    "clean": "rm -rf build bundle kepler-build assets node_modules package-lock.json dist",
-    "build": "npm-run-all compile",
-    "compile": "tsc -p tsconfig-build.json",
+    "clean": "rm -rf node_modules buildinfo.json dist",
+    "start": "npx react-native start",
+    "test": "jest --colors ",
     "test:snapshot": "jest --colors --updateSnapshot",
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest --colors",
-    "lint": "eslint src --ext .ts,.tsx && eslint tst --ext .ts,.tsx"
+    "lint": "eslint src tst --ext .ts,.tsx",
+    "lint:fix": "eslint src tst --ext .ts,.tsx --fix",
+    "compile": "tsc -p tsconfig.json",
+    "build": "npm run compile",
+    "release": "npm-run-all lint test compile"
   },
   "dependencies": {
-    "@amzn/keplerscript-react-native-safe-area-context": "3.2.0",
-    "@amzn/keplerscript-react-navigation-core": "5.15.3",
-    "@amzn/keplerscript-react-navigation-native": "5.9.4",
-    "@amzn/keplerscript-react-navigation-routers": "5.7.2",
-    "@amzn/keplerscript-react-navigation-stack": "5.14.4",
-    "@amzn/react-native-kepler": "1.0.0+rn0.67.3",
-    "@amzn/react-native-w3cmedia": "1.0.0+rn0.67.3",
-    "base-64": "1.0.0",
-    "bitmovin-player": "8.138.0-beta.5",
-    "react": "^17.0.2",
-    "react-native": "0.67.3",
-    "xmldom": "*"
+    "@amzn/react-native-kepler": "~2.0.0",
+    "@amzn/react-native-w3cmedia": "^2.1.1",
+    "base-64": "^1.0.0",
+    "bitmovin-player": "^8.138.0-beta.6",
+    "react": "18.2.0",
+    "react-native": "0.72.0",
+    "xmldom": "^0.6.0"
   },
   "devDependencies": {
-    "@amzn/types__react-native": "0.66.15",
-    "@babel/core": "^7.12.9",
-    "@babel/runtime": "^7.12.5",
-    "@react-native-community/eslint-config": "^3.0.1",
+    "@amzn/kepler-cli-platform": "^0",
+    "@babel/core": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
+    "@babel/traverse": "7.22.8",
+    "@react-native-community/cli": "11.3.2",
+    "@react-native/eslint-config": "0.72.2",
+    "@react-native/metro-config": "^0.72.6",
     "@testing-library/react-native": "^7.2.0",
-    "@types/jest": "^26.0.20",
-    "@types/react-test-renderer": "^16.9.2",
-    "@typescript-eslint/eslint-plugin": "^5.18.0",
-    "babel-jest": "^26.6.3",
+    "@types/jest": "^28.0.0",
+    "@types/react": "^18.0.24",
+    "@types/react-test-renderer": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "babel-jest": "^28.0.0",
     "eslint": "^8.12.0",
-    "eslint-plugin-simple-import-sort": "^5.0.3",
-    "jest": "^26.6.3",
-    "metro-react-native-babel-preset": "^0.64.0",
+    "jest": "^28.0.0",
+    "metro-react-native-babel-preset": "^0.76.5",
     "mustache": "^4.2.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.6.2",
-    "react-test-renderer": "^17.0.1",
-    "ts-jest": "^26.1.4",
-    "typescript": "^4.5.5"
-  },
-  "overrides": {
-    "@types/react-native": "$@amzn/types__react-native"
-  },
-  "resolutions": {
-    "@types/react": "^17"
-  },
-  "eslintConfig": {
-    "extends": "@react-native-community",
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "root": true
-  },
-  "prettier": {
-    "arrowParens": "avoid",
-    "bracketSameLine": true,
-    "bracketSpacing": false,
-    "singleQuote": true,
-    "trailingComma": "all"
+    "react-test-renderer": "18.2.0",
+    "ts-jest": "^28.0.0",
+    "typescript": "4.8.4"
   },
   "kepler": {
     "projectType": "application",

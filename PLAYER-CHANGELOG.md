@@ -3,6 +3,23 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
+## [8.138.0-beta.6] - 2024-02-20
+
+### Added
+- Player changes up to [v8.152.0](https://developer.bitmovin.com/playback/docs/release-notes-web#81520)
+
+### Changed
+- [NetworkConfig.requestApi](https://cdn.bitmovin.com/player/web/8/docs/interfaces/Core.NetworkConfig.html#requestApi) needs to be set to [NetworkRequestApi.Fetch](https://cdn.bitmovin.com/player/web/8/docs/enums/Core.NetworkRequestApi.html#Fetch) for Kepler
+
+### Fixed
+- App crash with Kepler SDK 0.6 caused by `TextEncoder`/`TextDecoder` polyfills
+- Slow video startup time
+
+### Removed
+- Polyfills for `TextEncoder`, `TextDecoder` and `URL`
+
+---
+
 ## [8.138.0-beta.5] - 2023-12-14
 
 ### Added

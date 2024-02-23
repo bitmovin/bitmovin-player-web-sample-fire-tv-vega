@@ -7,7 +7,8 @@ The sample shall be used as a starting point for integrating the Bitmovin Player
 
 ## Prerequisites
 
-- Kepler SDK v0.5
+- Kepler SDK v0.6 or later
+  (for Kepler SDK v0.5, use branch `support/kepler-sdk-0.5` of this repository)
 
 ## Getting started
 
@@ -31,9 +32,9 @@ This app is in an experimental state and is primarily intended for testing purpo
 
 Known Issues:
 - No player UI
-- No DRM playback
 - No progressive source playback
 - No client-side ad support
 - No SSAI support
+- No ClearKey DRM support
 - No MPEG-TS playback
 - No subtitle support

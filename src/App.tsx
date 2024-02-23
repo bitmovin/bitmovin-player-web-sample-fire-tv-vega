@@ -4,13 +4,14 @@
  * PROPRIETARY/CONFIDENTIAL.  USE IS SUBJECT TO LICENSE TERMS.
  */
 
-import {Button, View} from 'react-native';
+import React, { useState } from 'react';
+import { NetworkRequestApi, PlayerConfig } from 'bitmovin-player';
+import { Sources } from './Sources';
 import BitmovinPlayer from './BitmovinPlayer';
-import React, {useState} from 'react';
-import {Sources} from './Sources';
-import {PlayerConfig, SourceConfig} from 'bitmovin-player';
+import { Button, View } from 'react-native';
 
-export const ComAmazonBitmovinplayerwebsamplekeplerMain = () => {
+export const App = () => {
+  const sources = Object.values(Sources);
   const config: PlayerConfig = {
     key: 'NO-NEED-TO-PROVIDE-KEY-FOR-NOW',
     ui: false,
@@ -28,24 +29,24 @@ export const ComAmazonBitmovinplayerwebsamplekeplerMain = () => {
       error: e => console.warn('ERROR', e),
     },
     network: {
-      requestApi: 'fetch',
-    } as any,
+      requestApi: NetworkRequestApi.Fetch,
+    },
     tweaks: {
       enable_performance_logs: true,
     },
   };
 
-  let [source, setSource] = useState<SourceConfig>(Sources.ZattooDash);
+  let [currentSourceIndex, setCurrentSourceIndex] = useState<number>(0);
 
   return (
     <View>
       <Button
         title="SWITCH SOURCE"
         onPress={() => {
-          setSource(Sources.AomDash);
+          setCurrentSourceIndex((currentSourceIndex + 1) % sources.length);
         }}
       />
-      <BitmovinPlayer config={config} source={source} />
+      <BitmovinPlayer config={config} source={sources[currentSourceIndex]} />
     </View>
   );
 };

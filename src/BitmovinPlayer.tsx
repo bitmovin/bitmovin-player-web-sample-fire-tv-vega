@@ -1,19 +1,14 @@
-import {
-  ModuleName,
-  Player,
-  PlayerAPI,
-  PlayerConfig,
-  SourceConfig,
-} from 'bitmovin-player';
-import React, {useRef, useState} from 'react';
-import {useEffect} from 'react';
-import {HWEvent, Platform, StyleSheet, Text, View, useTVEventHandler} from 'react-native';
+import { Player, ModuleName, PlayerAPI, PlayerConfig, SourceConfig } from 'bitmovin-player';
+import React, { useRef, useState } from 'react';
+import { useEffect } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import W3CMediaPolyfill from './polyfills/W3CMediaPolyfill';
-import {KeplerVideoSurfaceView, VideoPlayer} from '@amzn/react-native-w3cmedia';
-import {polyfillElementFunctions} from './polyfills/Misc';
-import {WebCryptoPolyfill} from './polyfills/WebCryptoPolyfill';
-import {DOMParserPolyfill} from './polyfills/DOMParserPolyfill';
-import {Base64Polyfill} from './polyfills/Base64Polyfill';
+import { KeplerVideoSurfaceView, VideoPlayer } from '@amzn/react-native-w3cmedia';
+import { polyfillElementFunctions } from './polyfills/Misc';
+import { WebCryptoPolyfill } from './polyfills/WebCryptoPolyfill';
+import { DOMParserPolyfill } from './polyfills/DOMParserPolyfill';
+import { Base64Polyfill } from './polyfills/Base64Polyfill';
+import { HWEvent, Platform, useTVEventHandler } from '@amzn/react-native-kepler';
 
 W3CMediaPolyfill.install();
 WebCryptoPolyfill.install();
@@ -32,10 +27,7 @@ type BitmovinPlayerProps = {
   source: SourceConfig;
 };
 
-const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({
-  config,
-  source,
-}) => {
+const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, source }) => {
   try {
     // Remove style module as it uses a lot of DOM APIs
     Player.removeModule(ModuleName.Style);
@@ -44,7 +36,7 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({
   }
 
   const surfaceHandle = useRef<string | null>(null);
-  const video = useRef<VideoPlayer | null>();
+  const video = useRef<VideoPlayer | null>(null);
   const player = useRef<PlayerAPI | null>(null);
 
   const [title, setTitle] = useState<string>('No source loaded');
@@ -59,6 +51,8 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({
       setTitle(`${source.title ?? '<Untitled>'} [loading]`);
 
       player.current = new Player(undefined as any, config);
+      global.player = player.current;
+
       player.current.load(source).then(
         () => {
           console.warn('Successfully loaded source');
@@ -84,7 +78,7 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({
 
       destroyPlayer();
     };
-  }, [source]);
+  }, [source, config]);
 
   if (Platform.isTV) {
     useTVEventHandler((evt: HWEvent) => {
@@ -118,18 +112,12 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({
   const onSurfaceViewCreated = (_surfaceHandle: string): void => {
     console.log('onSurfaceViewCreated', _surfaceHandle);
     surfaceHandle.current = _surfaceHandle;
-
-    // TODO: check why this is needed
-    setTimeout(() => {
-      setVideoSurface(_surfaceHandle);
-    }, 100);
+    setVideoSurface(_surfaceHandle);
   };
 
   return (
     <View>
-      <Text style={styles.sourceTitle}>
-        {title}
-      </Text>
+      <Text style={styles.sourceTitle}>{title}</Text>
       <KeplerVideoSurfaceView onSurfaceViewCreated={onSurfaceViewCreated} />
     </View>
   );

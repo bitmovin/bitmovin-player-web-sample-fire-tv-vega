@@ -3,23 +3,22 @@
  *
  * PROPRIETARY/CONFIDENTIAL.  USE IS SUBJECT TO LICENSE TERMS.
  */
-import 'react-native';
 
-import {fireEvent, render} from '@testing-library/react-native';
+import 'react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 import * as React from 'react';
 
-import {ComAmazonBitmovinplayerwebsamplekeplerMain} from '../src/App';
+import { App } from '../src/App';
 
 describe('Template App Snapshot tests', () => {
   it('Initial App screen', () => {
-    // prettier-ignore
-    const screen = render(<ComAmazonBitmovinplayerwebsamplekeplerMain />);
+    const screen = render(<App />);
     expect(screen).toMatchSnapshot();
   });
-  it('App screen after button press', () => {
-    // prettier-ignore
-    const screen = render(<ComAmazonBitmovinplayerwebsamplekeplerMain />);
-    const button = screen.getByTestId('sampleButton');
+
+  it('App screen after link press', () => {
+    const screen = render(<App />);
+    const button = screen.getByTestId('sampleLink');
     fireEvent.press(button);
     expect(screen).toMatchSnapshot();
   });

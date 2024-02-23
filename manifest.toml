@@ -1,8 +1,8 @@
-# 
+#
 # Copyright (c) 2022 Amazon.com, Inc. or its affiliates.  All rights reserved.
-# 
+#
 # PROPRIETARY/CONFIDENTIAL.  USE IS SUBJECT TO LICENSE TERMS.
-# 
+#
 schema-version = 1
 
 [package]
@@ -11,19 +11,16 @@ version = "0.1.0"
 id = "com.amazon.bitmovinplayerwebsamplekepler"
 
 [components]
+
 [[components.interactive]]
 id = "com.amazon.bitmovinplayerwebsamplekepler.main"
-stem-family = "com.amazon.family.runtime.keplerscript.0.67"
+runtime-module = "/com.amazon.kepler.keplerscript.runtime.loader_2@IKeplerScript_2_0"
 launch-type = "singleton"
 
 [wants]
+
 [[wants.service]]
 id = "com.amazon.drm.key" # Required for DRM video playback
+
 [[wants.service]]
 id = "com.amazon.drm.crypto" # Required for DRM video playback
-
-[needs]
-[[needs.privilege]]
-id="com.amazon.media.secureplayback"
-[[needs.privilege]]
-id = "com.amazon.privilege.security.file-sharing" # Required for DRM video playback
