@@ -32,18 +32,28 @@ export const Sources: Record<string, SourceConfig> = {
 } as const;
 
 export const DrmSources: Record<string, SourceConfig> = {
-  AomDashDrm: {
-    title: 'AomDashDrm',
+  AomDashWidevine: {
+    title: 'AomDashWidevine',
     dash: 'https://cdn.bitmovin.com/content/assets/art-of-motion_drm/mpds/11331.mpd',
     drm: {
       widevine: {
         LA_URL: 'https://cwip-shaka-proxy.appspot.com/no_auth',
       },
-      // Note: PlayReady is currently not working
-      // playready: {
-      //   LA_URL:
-      //     'https://test.playready.microsoft.com/service/rightsmanager.asmx?PlayRight=1&ContentKey=EAtsIJQPd5pFiRUrV9Layw==',
-      // },
+    },
+  },
+  AomDashPlayready: {
+    title: 'AomDashPlayready',
+    dash: 'https://cdn.bitmovin.com/content/assets/art-of-motion_drm/mpds/11331.mpd',
+    drm: {
+      playready: {
+        LA_URL:
+          'https://test.playready.microsoft.com/service/rightsmanager.asmx?PlayRight=1&ContentKey=EAtsIJQPd5pFiRUrV9Layw==',
+        utf8message: true,
+        plaintextChallenge: true,
+        headers: {
+          'Content-Type': 'text/xml',
+        },
+      },
     },
   },
 };
