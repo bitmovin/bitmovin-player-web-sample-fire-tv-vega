@@ -39,3 +39,24 @@ Known Issues:
 - No ClearKey DRM support
 - No MPEG-TS playback
 - No subtitle support
+
+## Migration Guides
+
+### From beta.6 to beta.7
+Starting with player version `8.138.0-beta.7`, it is required to use the [modular player](https://developer.bitmovin.com/playback/docs/getting-started-web#modular-player-version) for Kepler applications.
+
+1. **Remove** direct player import: `import { Player } from 'bitmovin-player';`
+2. Import `Core` module: `import { Player } from 'bitmovin-player/modules/bitmovinplayer-core';`
+3. Import modules:
+    ```ts
+    import PolyfillModule = require('bitmovin-player/modules/bitmovinplayer-polyfill');
+    import ReactNativeModule = require('bitmovin-player/modules/bitmovinplayer-reactnative');
+    /* ... */
+    ```
+    Note that ES6 import syntax does not work at this time due to an issue with the Metro bundler.
+4. Add modules to player core:
+    ```ts
+    Player.addModule(PolyfillModule.default);
+    Player.addModule(ReactNativeModule.default);
+    /* ... */
+    ```
