@@ -66,18 +66,19 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
     // ignore
   }
 
-  const surfaceHandle = useRef<string | null>(null);
   const video = useRef<VideoPlayer | null>(null);
   const player = useRef<PlayerAPI | null>(null);
+
+  const [surfaceHandle, setSurfaceHandle] = useState<string | null>(null);
 
   const [title, setTitle] = useState<string>('No source loaded');
 
   useEffect(() => {
-    async function setupPlayer() {
+    async function setupPlayer(surfaceHandle: string) {
       // Note: re-using the "video element" is not supported on Kepler, we need a new on for every new source
       video.current = createVideoElement();
       await video.current.initialize();
-      video.current.setSurfaceHandle(surfaceHandle.current!);
+      video.current.setSurfaceHandle(surfaceHandle);
 
       setTitle(`${source.title ?? '<Untitled>'} [loading]`);
 
@@ -95,7 +96,9 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
       );
     }
 
-    setupPlayer();
+    if (surfaceHandle) {
+      setupPlayer(surfaceHandle);
+    }
 
     return () => {
       function destroyPlayer() {
@@ -109,7 +112,7 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
 
       destroyPlayer();
     };
-  }, [source, config]);
+  }, [source, config, surfaceHandle]);
 
   if (Platform.isTV) {
     useTVEventHandler((evt: HWEvent) => {
@@ -133,17 +136,10 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
     });
   }
 
-  const setVideoSurface = (_surfaceHandle: string) => {
-    if (video.current) {
-      console.log('Setting video surface', _surfaceHandle);
-      video.current.setSurfaceHandle(_surfaceHandle);
-    }
-  };
+  const onSurfaceViewCreated = (surfaceHandle: string): void => {
+    console.log('onSurfaceViewCreated', surfaceHandle);
 
-  const onSurfaceViewCreated = (_surfaceHandle: string): void => {
-    console.log('onSurfaceViewCreated', _surfaceHandle);
-    surfaceHandle.current = _surfaceHandle;
-    setVideoSurface(_surfaceHandle);
+    setSurfaceHandle(surfaceHandle);
   };
 
   return (
