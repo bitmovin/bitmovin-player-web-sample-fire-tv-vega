@@ -1,4 +1,4 @@
-import { ModuleName, PlayerAPI, PlayerConfig, SourceConfig } from 'bitmovin-player';
+import { PlayerAPI, PlayerConfig, SourceConfig } from 'bitmovin-player';
 import { Player } from 'bitmovin-player/modules/bitmovinplayer-core';
 
 import React, { useRef, useState } from 'react';
@@ -59,13 +59,6 @@ type BitmovinPlayerProps = {
 };
 
 const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, source }) => {
-  try {
-    // Remove style module as it uses a lot of DOM APIs
-    Player.removeModule(ModuleName.Style);
-  } catch (err) {
-    // ignore
-  }
-
   const video = useRef<VideoPlayer | null>(null);
   const player = useRef<PlayerAPI | null>(null);
 
