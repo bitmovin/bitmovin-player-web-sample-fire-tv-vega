@@ -3,6 +3,16 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
+## [8.138.0-beta.8] - 2024-03-19
+
+### Added
+- Player changes up to [v8.157.0](https://developer.bitmovin.com/playback/docs/release-notes-web#81570)
+
+### Changed
+- Utilize `webcrypto` API for decrypting ClearKey content
+
+---
+
 ## [8.138.0-beta.7] - 2024-03-12
 
 ### Added
@@ -12,6 +22,8 @@ For the public-facing player changelog please see https://developer.bitmovin.com
 - BREAKING: The `ReactNative` module has been removed from the monolith player.
   This means that [Modular Player](https://developer.bitmovin.com/playback/docs/getting-started-web#modular-player-version) usage is now required on Kepler.
   The demo has been updated to reflect this change. 
+
+---
 
 ## [8.138.0-beta.6] - 2024-02-20
 
