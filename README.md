@@ -38,7 +38,7 @@ Known Issues:
 - No SSAI support
 - No ClearKey DRM support
 - No MPEG-TS playback
-- No subtitle support
+- No support for TTMl subtitles or CEA captions
 
 ## Migration Guides
 
