@@ -3,6 +3,14 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
+## [8.138.0-beta.10] - 2024-04-15
+
+### Added
+- Support for CEA-608 captions on Kepler
+- Player changes up to [v8.161.0](https://developer.bitmovin.com/playback/docs/release-notes-web#81610)
+
+---
+
 ## [8.138.0-beta.9] - 2024-03-27
 
 ### Added
