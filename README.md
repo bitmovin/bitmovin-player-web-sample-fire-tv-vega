@@ -13,6 +13,7 @@ The sample shall be used as a starting point for integrating the Bitmovin Player
 
 ## Getting started
 
+- Configure the player license key and app ID in [App.tsx](./src/App.tsx)
 - Run `Kepler SDK: Set up launch.json` action in VS code to generate the `launch.json` for debugging on the Kepler simulator or device
 - Run `npm run build` to verify building the app works
 
@@ -38,7 +39,7 @@ Known Issues:
 - No SSAI support
 - No ClearKey DRM support
 - No MPEG-TS playback
-- No support for TTMl subtitles
+- No support for TTML subtitles
 
 ## Migration Guides
 
