@@ -7,8 +7,9 @@ The sample shall be used as a starting point for integrating the Bitmovin Player
 
 ## Prerequisites
 
-- Kepler SDK v0.6 or later
-  (for Kepler SDK v0.5, use branch `support/kepler-sdk-0.5` of this repository)
+- Kepler SDK v0.7 or later
+  - for Kepler SDK v0.6, use branch `support/kepler-sdk-0.6`
+  - for Kepler SDK v0.5, use branch `support/kepler-sdk-0.5`
 - Node.js version according to [.nvmrc](./.nvmrc)
 
 ## Getting started
