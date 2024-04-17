@@ -13,7 +13,7 @@ import { Button, View } from 'react-native';
 export const App = () => {
   const sources = Object.values(Sources);
   const config: PlayerConfig = {
-    key: 'NO-NEED-TO-PROVIDE-KEY-FOR-NOW',
+    key: 'YOUR_PLAYER_KEY',
     ui: false,
     logs: {
       onLog: (logLevel, message, ...params) => {
@@ -33,6 +33,7 @@ export const App = () => {
     },
     tweaks: {
       enable_performance_logs: true,
+      app_id: 'com.bitmovin.demo.kepler',
     },
   };
 
