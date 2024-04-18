@@ -78,9 +78,9 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
       player.current = new Player(undefined as any, config);
       global.player = player.current;
 
-      player.current.on(PlayerEvent.Error, (e: ErrorEvent) => {
+      player.current.on(PlayerEvent.Error, e => {
         console.warn('Player error', e);
-        updateTitle(source, `error: ${e.name}`);
+        updateTitle(source, `error: ${(e as ErrorEvent).name}`);
       });
 
       player.current.load(source).then(
