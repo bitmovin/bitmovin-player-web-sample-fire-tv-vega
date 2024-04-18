@@ -14,6 +14,7 @@ The sample shall be used as a starting point for integrating the Bitmovin Player
 
 ## Getting started
 
+- Configure the player license key and app ID in [App.tsx](./src/App.tsx)
 - Run `Kepler SDK: Set up launch.json` action in VS code to generate the `launch.json` for debugging on the Kepler simulator or device
 - Run `npm run build` to verify building the app works
 
@@ -39,9 +40,25 @@ Known Issues:
 - No SSAI support
 - No ClearKey DRM support
 - No MPEG-TS playback
-- No support for TTMl subtitles
+- No support for TTML subtitles
 
 ## Migration Guides
+
+### From beta.10 to beta.11
+Starting with player version `8.138.0-beta.11`, a valid player license key is required for Kepler applications.
+This key must be set in the player configuration, along with an `app_id` tweak:
+```ts
+const config = {
+  key: 'YOUR_PLAYER_LICENSE_KEY',
+  tweaks: {
+    app_id: 'com.example.yourapp',
+  },
+};
+```
+
+The license key can be obtained from the [Bitmovin Dashboard](https://bitmovin.com/dashboard).
+The `app_id` follows a reverse dns pattern such as `com.bitmovin.demo.kepler` and is a replacement for the hostname in kepler applications.
+It needs to be allow-listed on the Dashboard for license requests to be successful.
 
 ### From beta.6 to beta.7
 Starting with player version `8.138.0-beta.7`, it is required to use the [modular player](https://developer.bitmovin.com/playback/docs/getting-started-web#modular-player-version) for Kepler applications.
