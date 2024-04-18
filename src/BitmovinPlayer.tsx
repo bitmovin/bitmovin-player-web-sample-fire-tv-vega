@@ -1,4 +1,4 @@
-import { PlayerAPI, PlayerConfig, SourceConfig } from 'bitmovin-player';
+import { PlayerAPI, PlayerConfig, SourceConfig, PlayerEvent, ErrorEvent } from 'bitmovin-player';
 import { Player } from 'bitmovin-player/modules/bitmovinplayer-core';
 
 import React, { useRef, useState } from 'react';
@@ -73,24 +73,33 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
       await video.current.initialize();
       video.current.setSurfaceHandle(surfaceHandle);
 
-      setTitle(`${source.title ?? '<Untitled>'} [loading]`);
+      updateTitle(source, 'loading');
 
       player.current = new Player(undefined as any, config);
       global.player = player.current;
 
+      player.current.on(PlayerEvent.Error, (e: ErrorEvent) => {
+        console.warn('Player error', e);
+        updateTitle(source, `error: ${e.name}`);
+      });
+
       player.current.load(source).then(
         () => {
           console.warn('Successfully loaded source');
-          setTitle(`${source.title ?? '<Untitled>'} [loaded]`);
+          updateTitle(source, 'loaded');
         },
         e => {
           console.warn('Error while loading source', e);
+          updateTitle(source, 'error');
         },
       );
     }
 
     if (surfaceHandle) {
-      setupPlayer(surfaceHandle);
+      setupPlayer(surfaceHandle).catch(e => {
+        console.warn('Error while setting up player', e);
+        updateTitle(source, 'error');
+      });
     }
 
     return () => {
@@ -127,6 +136,10 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
         }
       }
     });
+  }
+
+  const updateTitle = (source: SourceConfig, status: string) => {
+    setTitle(`${source.title ?? '<Untitled>'} [${status}]`);
   }
 
   const onSurfaceViewCreated = (surfaceHandle: string): void => {
