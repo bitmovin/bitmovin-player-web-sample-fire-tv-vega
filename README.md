@@ -37,7 +37,7 @@ Known Issues:
 - No progressive source playback support today
 - No client-side ad support, due to no reusability of the video element on Kepler
 - SSAI support is limited to HLS with the same encryption characteristics across discontinuities, other use cases are currently blocked by a Kepler platform bug
-- No ClearKey DRM support due to missing `AES-CTR` support in the webcrypto API in Kepler browser
+- No ClearKey DRM support due to missing `AES-CTR` support in the webcrypto API on Kepler
 - MPEG-TS playback causing higher-than-usual CPU usage
 - No support for TTML subtitles: WebVTT and CEA captions are supported
 
