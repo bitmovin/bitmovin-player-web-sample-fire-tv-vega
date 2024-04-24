@@ -14,6 +14,7 @@
 import {
   requestMediaKeysSystemAccess,
   MediaSource,
+  HTMLMediaElement,
 } from '@amzn/react-native-w3cmedia';
 
 class W3CMediaPolyfill {
@@ -21,10 +22,7 @@ class W3CMediaPolyfill {
     console.log('Installing W3CMedia polyfills');
     global.MediaSource = global.MediaSource = MediaSource;
     global.navigator.requestMediaKeySystemAccess = requestMediaKeysSystemAccess;
-    // work around for shaka player
-    global.HTMLMediaElement = {}; // TODO: Find right way to install HTMLMediaElement polyfill
-    global.HTMLMediaElement.HAVE_CURRENT_DATA = 2; // TODO: Find right way to set these constants
-    global.HTMLMediaElement.HAVE_METADATA = 1; // TODO: Find right way to set these constants
+    global.HTMLMediaElement = HTMLMediaElement;
   }
 }
 
