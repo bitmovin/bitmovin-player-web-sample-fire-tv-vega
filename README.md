@@ -7,8 +7,9 @@ The sample shall be used as a starting point for integrating the Bitmovin Player
 
 ## Prerequisites
 
-- Kepler SDK v0.6 or later
-  (for Kepler SDK v0.5, use branch `support/kepler-sdk-0.5` of this repository)
+- Kepler SDK v0.7 or later
+  - for Kepler SDK v0.6, use branch `support/kepler-sdk-0.6`
+  - for Kepler SDK v0.5, use branch `support/kepler-sdk-0.5`
 - Node.js version according to [.nvmrc](./.nvmrc)
 
 ## Getting started
@@ -33,6 +34,8 @@ For player version changes that are purely relevant for Kepler, see [PLAYER-CHAN
 This app is in an experimental state and is primarily intended for testing purposes, but it will be updated to include more features and improvements over time.
 
 Known Issues:
+- App crashing when attempting DRM playback while running the app using Fast Refresh: This is due to a Kepler platform issue: https://community.amazondeveloper.com/t/app-crash-with-drm-content-and-sdk-0-7/4492/11 
+  As a workaround, launch the app through the Kepler CLI, as described here: https://developer.amazon.com/docs/kepler-tv/create_app.html#run-the-app-on-the-simulator
 - No Bitmovin Player UI: The [bitmovin-player-ui](https://github.com/bitmovin/bitmovin-player-ui) is not working on Kepler, as Bitmovin UI elements are created as HTML elements
 - No progressive source playback support today
 - No client-side ad support, due to no reusability of the video element on Kepler

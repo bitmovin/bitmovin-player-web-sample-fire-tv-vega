@@ -24,3 +24,12 @@ id = "com.amazon.drm.key" # Required for DRM video playback
 
 [[wants.service]]
 id = "com.amazon.drm.crypto" # Required for DRM video playback
+
+[[needs.privilege]]
+id = "com.amazon.privilege.security.file-sharing" # Required for DRM video playback
+
+[[wants.service]]
+id = "com.amazon.audio.stream" # Required for all Playback/Record clients
+
+[[wants.service]] 
+id = "com.amazon.audio.control" # Required for all AudioManager API clients
