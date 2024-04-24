@@ -35,6 +35,7 @@ This app is in an experimental state and is primarily intended for testing purpo
 
 Known Issues:
 - App crashing when attempting DRM playback while running the app using Fast Refresh: This is due to a Kepler platform issue: https://community.amazondeveloper.com/t/app-crash-with-drm-content-and-sdk-0-7/4492/11 
+  As a workaround, launch the app through the Kepler CLI, as described here: https://developer.amazon.com/docs/kepler-tv/create_app.html#run-the-app-on-the-simulator
 - No Bitmovin Player UI: The [bitmovin-player-ui](https://github.com/bitmovin/bitmovin-player-ui) is not working on Kepler, as Bitmovin UI elements are created as HTML elements
 - No progressive source playback support today
 - No client-side ad support, due to no reusability of the video element on Kepler
