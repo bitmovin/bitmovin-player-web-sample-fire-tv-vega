@@ -33,13 +33,13 @@ For player version changes that are purely relevant for Kepler, see [PLAYER-CHAN
 This app is in an experimental state and is primarily intended for testing purposes, but it will be updated to include more features and improvements over time.
 
 Known Issues:
-- No player UI
-- No progressive source playback
-- No client-side ad support
-- No SSAI support
-- No ClearKey DRM support
-- No MPEG-TS playback
-- No support for TTML subtitles
+- No Bitmovin Player UI: The [bitmovin-player-ui](https://github.com/bitmovin/bitmovin-player-ui) is not working on Kepler, as Bitmovin UI elements are created as HTML elements
+- No progressive source playback support today
+- No client-side ad support, due to no reusability of the video element on Kepler
+- SSAI support is limited to HLS with the same encryption characteristics across discontinuities, other use cases are currently blocked by a Kepler platform bug
+- No ClearKey DRM support due to missing `AES-CTR` support in the webcrypto API in Kepler browser
+- MPEG-TS playback causing higher-than-usual CPU usage
+- No support for TTML subtitles: WebVTT and CEA captions are supported
 
 ## Migration Guides
 
