@@ -37,7 +37,6 @@ Known Issues:
 - App crashing when attempting DRM playback while running the app using Fast Refresh: This is due to a Kepler platform issue: https://community.amazondeveloper.com/t/app-crash-with-drm-content-and-sdk-0-7/4492/11 
   As a workaround, launch the app through the Kepler CLI, as described here: https://developer.amazon.com/docs/kepler-tv/create_app.html#run-the-app-on-the-simulator
 - No Bitmovin Player UI: The [bitmovin-player-ui](https://github.com/bitmovin/bitmovin-player-ui) is not working on Kepler, as Bitmovin UI elements are created as HTML elements
-- No progressive source playback support today
 - No client-side ad support, due to no reusability of the video element on Kepler
 - SSAI support is limited to HLS with the same encryption characteristics across discontinuities, other use cases are currently blocked by a Kepler platform bug
 - No ClearKey DRM support due to missing `AES-CTR` support in the webcrypto API on Kepler
