@@ -18,6 +18,7 @@ import { HWEvent, Platform, useTVEventHandler } from '@amzn/react-native-kepler'
 import PolyfillModule = require('bitmovin-player/modules/bitmovinplayer-polyfill');
 import ReactNativeModule = require('bitmovin-player/modules/bitmovinplayer-reactnative');
 import EngineBitmovinModule = require('bitmovin-player/modules/bitmovinplayer-engine-bitmovin');
+import EngineNativeModule = require('bitmovin-player/modules/bitmovinplayer-engine-native');
 import MseRendererModule = require('bitmovin-player/modules/bitmovinplayer-mserenderer');
 import XmlModule = require('bitmovin-player/modules/bitmovinplayer-xml');
 import DashModule = require('bitmovin-player/modules/bitmovinplayer-dash');
@@ -35,6 +36,7 @@ Base64Polyfill.install();
 
 Player.addModule(PolyfillModule.default);
 Player.addModule(ReactNativeModule.default);
+Player.addModule(EngineNativeModule.default);
 Player.addModule(EngineBitmovinModule.default);
 Player.addModule(MseRendererModule.default);
 Player.addModule(HlsModule.default);
