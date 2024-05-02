@@ -3,7 +3,7 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
-## [8.138.0-beta.12]
+## [8.138.0-beta.12] - 2024-05-02
 
 ### Added
 - Support for progressive source playback on Kepler
@@ -12,11 +12,15 @@ For the public-facing player changelog please see https://developer.bitmovin.com
 ### Fixed
 - Uncaught exceptions caused by fetch request cancellations
 
+---
+
 ## [8.138.0-beta.11] - 2024-04-18
 
 ### Changed
 - BREAKING: Licensing and impression requests are now performed on Kepler.
   This means that a valid player license key is now required, along with an `app_id` tweak in the player configuration.
+
+---
 
 ## [8.138.0-beta.10] - 2024-04-15
 
