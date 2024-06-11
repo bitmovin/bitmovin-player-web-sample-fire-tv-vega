@@ -6,14 +6,22 @@
   ],
   "scripts": {
     "clean": "rm -rf node_modules buildinfo.json dist",
-    "start": "npx react-native start",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest --colors ",
     "test:snapshot": "jest --colors --updateSnapshot",
     "lint": "eslint src tst --ext .ts,.tsx",
     "lint:fix": "eslint src tst --ext .ts,.tsx --fix",
     "compile": "tsc -p tsconfig.json",
     "build": "npm run compile",
-    "release": "npm-run-all lint test compile"
+    "release": "npm-run-all lint test compile",
+    "simulator:start": "kepler device simulator start",
+    "simulator:stop": "kepler device simulator stop",
+    "fastrefresh:start": "kepler device start-port-forwarding -p 8081 --forward false",
+    "fastrefresh:stop": "kepler device stop-port-forwarding -p 8081 --forward false",
+    "app:install": "kepler device install-app --dir .",
+    "app:launch": "kepler device launch-app",
+    "app:build:debug": "kepler build -b Debug && npm run app:install && npm run app:launch",
+    "app:build": "kepler build && npm run app:install && npm run app:launch"
   },
   "dependencies": {
     "@amzn/react-native-kepler": "~2.0.0",
