@@ -17,19 +17,51 @@ id = "com.amazon.bitmovinplayerwebsamplekepler.main"
 runtime-module = "/com.amazon.kepler.keplerscript.runtime.loader_2@IKeplerScript_2_0"
 launch-type = "singleton"
 
+[[needs.privilege]]
+id = "com.amazon.privilege.security.file-sharing"
+
+[offers]
+
+[[offers.service]]
+id = "com.amazon.gipc.uuid.*"
+
 [wants]
 
-[[wants.service]]
-id = "com.amazon.drm.key" # Required for DRM video playback
+[[wants.privilege]]
+id = "com.amazon.privilege.package.query"
+
+[[wants.privilege]]
+id = "com.amazon.devconf.privilege.accessibility"
 
 [[wants.service]]
-id = "com.amazon.drm.crypto" # Required for DRM video playback
-
-[[needs.privilege]]
-id = "com.amazon.privilege.security.file-sharing" # Required for DRM video playback
+id = "com.amazon.drm.key"
 
 [[wants.service]]
-id = "com.amazon.audio.stream" # Required for all Playback/Record clients
+id = "com.amazon.drm.crypto"
 
-[[wants.service]] 
-id = "com.amazon.audio.control" # Required for all AudioManager API clients
+[[wants.service]]
+id = "com.amazon.mediametrics.service"
+
+[[wants.service]]
+id = "com.amazon.media.server"
+
+[[wants.service]]
+id = "com.amazon.media.playersession.service"
+
+[[wants.service]]
+id = "com.amazon.mediabuffer.service"
+
+[[wants.service]]
+id = "com.amazon.mediatransform.service"
+
+[[wants.service]]
+id = "com.amazon.audio.stream"
+
+[[wants.service]]
+id = "com.amazon.audio.control"
+
+[[wants.service]]
+id = "com.amazon.audio.system"
+
+[[wants.service]]
+id = "com.amazon.gipc.uuid.*"
