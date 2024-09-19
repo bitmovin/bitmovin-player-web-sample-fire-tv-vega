@@ -1,4 +1,4 @@
-import { PlayerAPI, PlayerConfig, SourceConfig, PlayerEvent, ErrorEvent } from 'bitmovin-player';
+import { PlayerAPI, PlayerConfig, SourceConfig, PlayerEvent, ErrorEvent, SubtitleCueEvent } from 'bitmovin-player';
 import { Player } from 'bitmovin-player/modules/bitmovinplayer-core';
 
 import React, { useRef, useState } from 'react';
@@ -28,6 +28,9 @@ import ContainerMp4Module = require('bitmovin-player/modules/bitmovinplayer-cont
 import HlsModule = require('bitmovin-player/modules/bitmovinplayer-hls');
 import DrmModule = require('bitmovin-player/modules/bitmovinplayer-drm');
 import CryptoModule = require('bitmovin-player/modules/bitmovinplayer-crypto');
+import SubtitlesModule = require('bitmovin-player/modules/bitmovinplayer-subtitles');
+import SubtitlesVttModule = require('bitmovin-player/modules/bitmovinplayer-subtitles-vtt');
+import SubtitlesCeaModule = require('bitmovin-player/modules/bitmovinplayer-subtitles-cea608');
 
 W3CMediaPolyfill.install();
 WebCryptoPolyfill.install();
@@ -47,6 +50,9 @@ Player.addModule(ContainerTSModule.default);
 Player.addModule(ContainerMp4Module.default);
 Player.addModule(DrmModule.default);
 Player.addModule(CryptoModule.default);
+Player.addModule(SubtitlesModule.default);
+Player.addModule(SubtitlesVttModule.default);
+Player.addModule(SubtitlesCeaModule.default);
 
 function createVideoElement(): VideoPlayer {
   const video = new VideoPlayer();
@@ -63,6 +69,7 @@ type BitmovinPlayerProps = {
 const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, source }) => {
   const video = useRef<VideoPlayer | null>(null);
   const player = useRef<PlayerAPI | null>(null);
+  const [caption, setCaption] = useState<string>('');
 
   const [surfaceHandle, setSurfaceHandle] = useState<string | null>(null);
 
@@ -80,6 +87,16 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
       player.current = new Player(undefined as any, config);
       global.player = player.current;
 
+      player.current.on(PlayerEvent.CueEnter, event => {
+        // TODO append the caption cue to the existing caption, if any
+        setCaption((event as SubtitleCueEvent).text);
+      });
+
+      player.current.on(PlayerEvent.CueExit, _event => {
+        // TODO only clear the caption cue that was just exited
+        setCaption('');
+      });
+
       player.current.on(PlayerEvent.Error, e => {
         console.warn('Player error', e);
         updateTitle(source, `error: ${(e as ErrorEvent).name}`);
@@ -89,6 +106,12 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
         () => {
           console.warn('Successfully loaded source');
           updateTitle(source, 'loaded');
+
+          // Automatically enable the first subtitle track
+          const subtitles = player.current?.subtitles.list();
+          if (subtitles && subtitles.length > 0) {
+            player.current?.subtitles.enable(subtitles[0].id);
+          }
         },
         e => {
           console.warn('Error while loading source', e);
@@ -142,7 +165,7 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
 
   const updateTitle = (source: SourceConfig, status: string) => {
     setTitle(`${source.title ?? '<Untitled>'} [${status}]`);
-  }
+  };
 
   const onSurfaceViewCreated = (surfaceHandle: string): void => {
     console.log('onSurfaceViewCreated', surfaceHandle);
@@ -154,6 +177,7 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
     <View>
       <Text style={styles.sourceTitle}>{title}</Text>
       <KeplerVideoSurfaceView onSurfaceViewCreated={onSurfaceViewCreated} />
+      <Text style={styles.caption}>{caption}</Text>
     </View>
   );
 };
@@ -166,6 +190,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 20,
     left: 20,
+  },
+  caption: {
+    color: 'white',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    fontSize: 30,
+    position: 'absolute',
+    top: 800,
+    alignSelf: 'center',
+    textAlign: 'center',
   },
 });
 
