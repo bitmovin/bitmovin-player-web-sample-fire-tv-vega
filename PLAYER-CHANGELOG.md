@@ -3,6 +3,17 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
+## [8.138.0-beta.15] - 2024-10-15
+
+### Added
+- Player changes up to [v8.185.0](https://developer.bitmovin.com/playback/docs/release-notes-web#81850)
+- Support for AES-128 encrypted content (fixed in Kepler SDK 0.11)
+
+### Removed
+- Workaround for progressive playback due to events not firing on Kepler (fixed in Kepler SDK 0.11)
+
+---
+
 ## [8.138.0-beta.14] - 2024-08-06
 
 ### Added
