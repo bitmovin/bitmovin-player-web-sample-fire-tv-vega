@@ -3,6 +3,21 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
+## [8.138.0-beta.17] - 2024-11-11
+
+### Added
+- Player changes up to [v8.189.0](https://developer.bitmovin.com/playback/docs/release-notes-web#81890)
+- Support for ClearKey-encrypted content (fixed in Kepler SDK 0.12)
+
+---
+
+## [8.138.0-beta.16] - 2024-10-29
+
+### Added
+- Player changes up to [v8.187.0](https://developer.bitmovin.com/playback/docs/release-notes-web#81870)
+
+---
+
 ## [8.138.0-beta.15] - 2024-10-15
 
 ### Added
