@@ -8,12 +8,12 @@ schema-version = 1
 [package]
 title = "Bitmovin Player Sample Application"
 version = "0.1.0"
-id = "com.amazon.bitmovinplayerwebsamplekepler"
+id = "com.bitmovin.bitmovinplayerwebsamplekepler"
 
 [components]
 
 [[components.interactive]]
-id = "com.amazon.bitmovinplayerwebsamplekepler.main"
+id = "com.bitmovin.bitmovinplayerwebsamplekepler.main"
 runtime-module = "/com.amazon.kepler.keplerscript.runtime.loader_2@IKeplerScript_2_0"
 launch-type = "singleton"
 
