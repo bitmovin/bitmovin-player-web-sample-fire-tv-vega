@@ -3,6 +3,16 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
+## [8.138.0-beta.18] - 2024-12-17
+
+### Added
+- Player changes up to [v8.194.0](https://developer.bitmovin.com/playback/docs/release-notes-web#81940)
+
+### Fixed
+- Audio track switching causing playback to freeze when codec properties change
+
+---
+
 ## [8.138.0-beta.17] - 2024-11-11
 
 ### Added
