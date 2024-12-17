@@ -30,7 +30,7 @@
     "@amzn/react-native-kepler": "^2.0.1731521715",
     "@amzn/react-native-w3cmedia": "^2.1.32",
     "base-64": "^1.0.0",
-    "bitmovin-player": "^8.138.0-beta.17",
+    "bitmovin-player": "^8.138.0-beta.18",
     "react": "18.2.0",
     "react-native": "0.72.0",
     "xmldom": "^0.6.0"
