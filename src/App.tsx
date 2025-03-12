@@ -28,9 +28,6 @@ export const App = () => {
       warning: e => console.warn('WARNING', e),
       error: e => console.warn('ERROR', e),
     },
-    network: {
-      requestApi: NetworkRequestApi.Fetch,
-    },
     tweaks: {
       enable_performance_logs: true,
       app_id: 'com.bitmovin.demo.kepler',
