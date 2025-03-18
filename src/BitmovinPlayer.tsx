@@ -86,7 +86,7 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
         updateTitle(source, `error: ${(e as ErrorEvent).name}`);
       });
 
-      player.current.on(PlayerEvent.Seeked, e => {
+      player.current.on(PlayerEvent.Seeked, () => {
         setSeekTarget(null);
       });
 
