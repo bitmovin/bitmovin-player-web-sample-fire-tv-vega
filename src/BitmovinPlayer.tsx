@@ -67,6 +67,7 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
   const [surfaceHandle, setSurfaceHandle] = useState<string | null>(null);
 
   const [title, setTitle] = useState<string>('No source loaded');
+  const [seekTarget, setSeekTarget] = useState<number | null>(null);
 
   useEffect(() => {
     async function setupPlayer(surfaceHandle: string) {
@@ -83,6 +84,10 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
       player.current.on(PlayerEvent.Error, e => {
         console.warn('Player error', e);
         updateTitle(source, `error: ${(e as ErrorEvent).name}`);
+      });
+
+      player.current.on(PlayerEvent.Seeked, e => {
+        setSeekTarget(null);
       });
 
       player.current.load(source).then(
@@ -132,13 +137,29 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
         } else if (evt.eventType === 'pause') {
           player.current.pause();
         } else if (evt.eventType === 'skip_forward') {
-          player.current.seek(player.current.getCurrentTime() + 10);
+          skip(10);
         } else if (evt.eventType === 'skip_backward') {
-          player.current.seek(player.current.getCurrentTime() - 10);
+          skip(-10);
         }
       }
     });
   }
+
+  const skip = (seconds: number) => {
+    const seekOrigin = seekTarget ?? player.current?.getCurrentTime() ?? 0;
+    setSeekTarget(seekOrigin + seconds);
+  }
+
+  useEffect(() => {
+    if (seekTarget !== null && player.current) {
+      /**
+       * Note: For live streams, implement a different approach using `player.current.timeShift(offset)` or enable
+       * `tweaks.enable_seek_for_live` in the player configuration.
+       */
+      console.log('Seeking to', seekTarget);
+      player.current.seek(seekTarget);
+    }
+  }, [seekTarget]);
 
   const updateTitle = (source: SourceConfig, status: string) => {
     setTitle(`${source.title ?? '<Untitled>'} [${status}]`);
