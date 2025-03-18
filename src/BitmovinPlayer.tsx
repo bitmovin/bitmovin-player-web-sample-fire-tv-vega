@@ -126,17 +126,7 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
   if (Platform.isTV) {
     useTVEventHandler((evt: HWEvent) => {
       if (evt && evt.eventKeyAction === 0 && player.current) {
-        if (evt.eventType === 'playpause') {
-          if (player.current.isPlaying()) {
-            player.current.pause();
-          } else {
-            player.current.play();
-          }
-        } else if (evt.eventType === 'play') {
-          player.current.play();
-        } else if (evt.eventType === 'pause') {
-          player.current.pause();
-        } else if (evt.eventType === 'skip_forward') {
+        if (evt.eventType === 'skip_forward') {
           skip(10);
         } else if (evt.eventType === 'skip_backward') {
           skip(-10);
