@@ -3,6 +3,15 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
+## [8.138.0-beta.20] - 2025-04-01
+
+### Added
+- Player changes up to [v8.204.0](https://developer.bitmovin.com/playback/docs/release-notes-web#82040)
+
+### Fixed
+- Improved stability of startup and restart after running out of buffer
+- Unnecessary codec support checks during live stream playback
+
 ## [8.138.0-beta.19] - 2025-02-18
 
 ### Added
