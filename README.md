@@ -16,6 +16,8 @@ The sample shall be used as a starting point for integrating the Bitmovin Player
 - Run `Kepler SDK: Set up launch.json` action in VS code to generate the `launch.json` for debugging on the Kepler simulator or device
 - Run `npm run build` to verify building the app works
 
+To extend this app to your use case, please ensure you follow the [Modular Player Best Practices](https://developer.bitmovin.com/playback/docs/getting-started-with-the-modular-player#best-practices)!
+
 ## Debugging
 
 Simply click VS Code's `Run and Debug` to build, install and run the app on the Kepler simulator or a connected Kepler device.
