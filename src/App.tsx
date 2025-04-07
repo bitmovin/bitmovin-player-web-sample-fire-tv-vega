@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from 'react';
-import { PlayerConfig } from 'bitmovin-player';
+import type { PlayerConfig } from 'bitmovin-player';
 import { Sources } from './Sources';
 import BitmovinPlayer from './BitmovinPlayer';
 import { Button, View } from 'react-native';

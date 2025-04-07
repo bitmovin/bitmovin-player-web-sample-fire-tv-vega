@@ -1,4 +1,5 @@
-import { PlayerAPI, PlayerConfig, SourceConfig, PlayerEvent, ErrorEvent } from 'bitmovin-player';
+import type { PlayerAPI, PlayerConfig, SourceConfig, ErrorEvent } from 'bitmovin-player';
+import { PlayerEvent } from 'bitmovin-player';
 import { Player } from 'bitmovin-player/modules/bitmovinplayer-core';
 
 import React, { useRef, useState } from 'react';
@@ -10,7 +11,8 @@ import { polyfillElementFunctions } from './polyfills/Misc';
 import { WebCryptoPolyfill } from './polyfills/WebCryptoPolyfill';
 import { DOMParserPolyfill } from './polyfills/DOMParserPolyfill';
 import { Base64Polyfill } from './polyfills/Base64Polyfill';
-import { HWEvent, useTVEventHandler } from '@amzn/react-native-kepler';
+import type { HWEvent } from '@amzn/react-native-kepler';
+import { useTVEventHandler } from '@amzn/react-native-kepler';
 
 /**
  * Note: Due to an issue with the Metro bundler, Player Modules need to be imported using `require`.
