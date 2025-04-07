@@ -1,6 +1,5 @@
 import type { PlayerAPI, PlayerConfig, SourceConfig, ErrorEvent } from 'bitmovin-player';
-import { PlayerEvent } from 'bitmovin-player';
-import { Player } from 'bitmovin-player/modules/bitmovinplayer-core';
+import { Player, PlayerEvent } from 'bitmovin-player/modules/bitmovinplayer-core';
 
 import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
