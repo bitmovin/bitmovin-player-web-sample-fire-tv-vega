@@ -10,7 +10,7 @@ import { polyfillElementFunctions } from './polyfills/Misc';
 import { WebCryptoPolyfill } from './polyfills/WebCryptoPolyfill';
 import { DOMParserPolyfill } from './polyfills/DOMParserPolyfill';
 import { Base64Polyfill } from './polyfills/Base64Polyfill';
-import { HWEvent, Platform, useTVEventHandler } from '@amzn/react-native-kepler';
+import { HWEvent, useTVEventHandler } from '@amzn/react-native-kepler';
 
 /**
  * Note: Due to an issue with the Metro bundler, Player Modules need to be imported using `require`.
@@ -118,31 +118,29 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
     };
   }, [source, config, surfaceHandle]);
 
-  if (Platform.isTV) {
-    useTVEventHandler((evt: HWEvent) => {
-      if (evt && evt.eventKeyAction === 0 && player.current) {
-        if (evt.eventType === 'playpause') {
-          if (player.current.isPlaying()) {
-            player.current.pause();
-          } else {
-            player.current.play();
-          }
-        } else if (evt.eventType === 'play') {
-          player.current.play();
-        } else if (evt.eventType === 'pause') {
+  useTVEventHandler((evt: HWEvent) => {
+    if (evt && evt.eventKeyAction === 0 && player.current) {
+      if (evt.eventType === 'playpause') {
+        if (player.current.isPlaying()) {
           player.current.pause();
-        } else if (evt.eventType === 'skip_forward') {
-          player.current.seek(player.current.getCurrentTime() + 10);
-        } else if (evt.eventType === 'skip_backward') {
-          player.current.seek(player.current.getCurrentTime() - 10);
+        } else {
+          player.current.play();
         }
+      } else if (evt.eventType === 'play') {
+        player.current.play();
+      } else if (evt.eventType === 'pause') {
+        player.current.pause();
+      } else if (evt.eventType === 'skip_forward') {
+        player.current.seek(player.current.getCurrentTime() + 10);
+      } else if (evt.eventType === 'skip_backward') {
+        player.current.seek(player.current.getCurrentTime() - 10);
       }
-    });
-  }
+    }
+  });
 
   const updateTitle = (source: SourceConfig, status: string) => {
     setTitle(`${source.title ?? '<Untitled>'} [${status}]`);
-  }
+  };
 
   const onSurfaceViewCreated = (surfaceHandle: string): void => {
     console.log('onSurfaceViewCreated', surfaceHandle);
