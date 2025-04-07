@@ -1,5 +1,5 @@
-import { PlayerAPI, PlayerConfig, SourceConfig, PlayerEvent, ErrorEvent } from 'bitmovin-player';
-import { Player } from 'bitmovin-player/modules/bitmovinplayer-core';
+import type { PlayerAPI, PlayerConfig, SourceConfig, ErrorEvent } from 'bitmovin-player';
+import { Player, PlayerEvent } from 'bitmovin-player/modules/bitmovinplayer-core';
 
 import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
@@ -10,7 +10,8 @@ import { polyfillElementFunctions } from './polyfills/Misc';
 import { WebCryptoPolyfill } from './polyfills/WebCryptoPolyfill';
 import { DOMParserPolyfill } from './polyfills/DOMParserPolyfill';
 import { Base64Polyfill } from './polyfills/Base64Polyfill';
-import { HWEvent, Platform, useTVEventHandler } from '@amzn/react-native-kepler';
+import type { HWEvent } from '@amzn/react-native-kepler';
+import { useTVEventHandler } from '@amzn/react-native-kepler';
 
 /**
  * Note: Due to an issue with the Metro bundler, Player Modules need to be imported using `require`.
@@ -69,11 +70,11 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
   const [title, setTitle] = useState<string>('No source loaded');
 
   useEffect(() => {
-    async function setupPlayer(surfaceHandle: string) {
+    async function setupPlayer(surfaceViewHandle: string) {
       // Note: re-using the "video element" is not supported on Kepler, we need a new on for every new source
       video.current = createVideoElement();
       await video.current.initialize();
-      video.current.setSurfaceHandle(surfaceHandle);
+      video.current.setSurfaceHandle(surfaceViewHandle);
 
       updateTitle(source, 'loading');
 
@@ -118,36 +119,34 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
     };
   }, [source, config, surfaceHandle]);
 
-  if (Platform.isTV) {
-    useTVEventHandler((evt: HWEvent) => {
-      if (evt && evt.eventKeyAction === 0 && player.current) {
-        if (evt.eventType === 'playpause') {
-          if (player.current.isPlaying()) {
-            player.current.pause();
-          } else {
-            player.current.play();
-          }
-        } else if (evt.eventType === 'play') {
-          player.current.play();
-        } else if (evt.eventType === 'pause') {
+  useTVEventHandler((evt: HWEvent) => {
+    if (evt && evt.eventKeyAction === 0 && player.current) {
+      if (evt.eventType === 'playpause') {
+        if (player.current.isPlaying()) {
           player.current.pause();
-        } else if (evt.eventType === 'skip_forward') {
-          player.current.seek(player.current.getCurrentTime() + 10);
-        } else if (evt.eventType === 'skip_backward') {
-          player.current.seek(player.current.getCurrentTime() - 10);
+        } else {
+          player.current.play();
         }
+      } else if (evt.eventType === 'play') {
+        player.current.play();
+      } else if (evt.eventType === 'pause') {
+        player.current.pause();
+      } else if (evt.eventType === 'skip_forward') {
+        player.current.seek(player.current.getCurrentTime() + 10);
+      } else if (evt.eventType === 'skip_backward') {
+        player.current.seek(player.current.getCurrentTime() - 10);
       }
-    });
-  }
+    }
+  });
 
-  const updateTitle = (source: SourceConfig, status: string) => {
-    setTitle(`${source.title ?? '<Untitled>'} [${status}]`);
-  }
+  const updateTitle = (sourceConfig: SourceConfig, status: string) => {
+    setTitle(`${sourceConfig.title ?? '<Untitled>'} [${status}]`);
+  };
 
-  const onSurfaceViewCreated = (surfaceHandle: string): void => {
-    console.log('onSurfaceViewCreated', surfaceHandle);
+  const onSurfaceViewCreated = (surfaceViewHandle: string): void => {
+    console.log('onSurfaceViewCreated', surfaceViewHandle);
 
-    setSurfaceHandle(surfaceHandle);
+    setSurfaceHandle(surfaceViewHandle);
   };
 
   return (

@@ -1,4 +1,4 @@
-import { SourceConfig } from 'bitmovin-player';
+import type { SourceConfig } from 'bitmovin-player';
 
 export const Sources: Record<string, SourceConfig> = {
   AomDash: {
