@@ -22,13 +22,15 @@
     "fastrefresh:start": "kepler device start-port-forwarding -p 8081 --forward false",
     "fastrefresh:stop": "kepler device stop-port-forwarding -p 8081 --forward false",
     "app:install": "kepler device install-app --dir .",
+    "app:install:debug": "kepler device install-app --dir . --build-type Debug",
+    "app:install-and-launch": "kepler device install-app --dir . --build-type Debug && kepler device launch-app",
     "app:launch": "kepler device launch-app",
     "app:build:debug": "kepler build -b Debug && npm run app:install && npm run app:launch",
     "app:build": "kepler build && npm run app:install && npm run app:launch"
   },
   "dependencies": {
-    "@amzn/react-native-kepler": "^2.0.1743523973",
-    "@amzn/react-native-w3cmedia": "^2.1.59",
+    "@amzn/react-native-kepler": "^2.0.1744817410",
+    "@amzn/react-native-w3cmedia": "^2.1.63",
     "base-64": "^1.0.0",
     "bitmovin-player": "^8.138.0-beta.20",
     "react": "18.2.0",
