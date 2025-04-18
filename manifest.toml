@@ -15,6 +15,7 @@ id = "com.bitmovin.bitmovinplayerwebsamplekepler"
 [[components.interactive]]
 id = "com.bitmovin.bitmovinplayerwebsamplekepler.main"
 runtime-module = "/com.amazon.kepler.keplerscript.runtime.loader_2@IKeplerScript_2_0"
+categories = ["com.amazon.category.main", "com.amazon.category.kepler.media"]
 launch-type = "singleton"
 
 [[needs.privilege]]

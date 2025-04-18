@@ -11,11 +11,7 @@
  * IMPLIED, OR STATUTORY, INCLUDING THE IMPLIED WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
  */
-import {
-  requestMediaKeysSystemAccess,
-  MediaSource,
-  HTMLMediaElement,
-} from '@amzn/react-native-w3cmedia';
+import { requestMediaKeysSystemAccess, MediaSource, HTMLMediaElement } from '@amzn/react-native-w3cmedia';
 
 class W3CMediaPolyfill {
   static install() {
