@@ -22,6 +22,8 @@
     "fastrefresh:start": "kepler device start-port-forwarding -p 8081 --forward false",
     "fastrefresh:stop": "kepler device stop-port-forwarding -p 8081 --forward false",
     "app:install": "kepler device install-app --dir .",
+    "app:install:debug": "kepler device install-app --dir . --build-type Debug",
+    "app:install-and-launch": "kepler device install-app --dir . --build-type Debug && kepler device launch-app",
     "app:launch": "kepler device launch-app",
     "app:build:debug": "kepler build -b Debug && npm run app:install && npm run app:launch",
     "app:build": "kepler build && npm run app:install && npm run app:launch"
