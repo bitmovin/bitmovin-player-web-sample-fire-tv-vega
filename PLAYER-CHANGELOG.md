@@ -3,6 +3,13 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
+## [8.138.0-beta.21] - 2025-04-28
+
+### Added
+- Player changes up to [v8.207.0](https://developer.bitmovin.com/playback/docs/release-notes-web#82070)
+- Support for TTML subtitles on Kepler
+  Note: this requires an additional DOM polyfill for `window.Element` in the Kepler application
+
 ## [8.138.0-beta.20] - 2025-04-01
 
 ### Added
