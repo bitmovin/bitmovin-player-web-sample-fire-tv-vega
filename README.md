@@ -31,6 +31,9 @@ See https://developer.amazon.com/docs/kepler-tv/cli-tools.html and https://devel
 The application uses a custom Bitmovin Player build that is compatible with the Kepler SDK.
 For player version changes that are purely relevant for Kepler, see [PLAYER-CHANGELOG.md](./PLAYER-CHANGELOG.md).
 
+**Note:** Ensure that you are only using player versions in the form `8.138.0-beta.XX`.
+Other player versions are not yet supported on Kepler. 
+
 This app is in an experimental state and is primarily intended for testing purposes, but it will be updated to include more features and improvements over time.
 
 Known Issues:
