@@ -29,8 +29,8 @@
     "app:build": "kepler build && npm run app:install && npm run app:launch"
   },
   "dependencies": {
-    "@amzn/react-native-kepler": "^2.0.1744817410",
-    "@amzn/react-native-w3cmedia": "^2.1.63",
+    "@amzn/react-native-kepler": "^2.0.1746661155",
+    "@amzn/react-native-w3cmedia": "^2.1.66",
     "@xmldom/xmldom": "^0.9.8",
     "base-64": "^1.0.0",
     "bitmovin-player": "^8.138.0-beta.22",
