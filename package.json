@@ -38,7 +38,7 @@
     "react-native": "0.72.0"
   },
   "devDependencies": {
-    "@amzn/kepler-cli-platform": "^0.18.7",
+    "@amzn/kepler-cli-platform": "^0.19.12",
     "@babel/core": "^7.20.0",
     "@babel/runtime": "^7.20.0",
     "@babel/traverse": "7.22.8",
