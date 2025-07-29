@@ -41,7 +41,7 @@
     "@amzn/kepler-cli-platform": "^0.20.4",
     "@babel/core": "^7.20.0",
     "@babel/runtime": "^7.20.0",
-    "@babel/traverse": "7.22.8",
+    "@babel/traverse": "7.28.0",
     "@react-native-community/cli": "11.3.2",
     "@react-native/eslint-config": "0.72.2",
     "@react-native/metro-config": "^0.72.6",
