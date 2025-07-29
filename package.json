@@ -33,7 +33,7 @@
     "@amzn/react-native-w3cmedia": "^2.1.80",
     "@xmldom/xmldom": "^0.9.8",
     "base-64": "^1.0.0",
-    "bitmovin-player": "^8.138.0-beta.22",
+    "bitmovin-player": "^8.138.0-beta.23",
     "react": "18.2.0",
     "react-native": "0.72.0"
   },
