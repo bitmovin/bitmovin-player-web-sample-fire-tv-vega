@@ -3,6 +3,11 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
+## [8.138.0-beta.23] - 2025-07-29
+
+### Added
+- Player changes up to [v8.220.0](https://developer.bitmovin.com/playback/docs/release-notes-web#82200)
+
 ## [8.138.0-beta.22] - 2025-05-13
 
 ### Added
