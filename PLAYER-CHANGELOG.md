@@ -3,6 +3,15 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
+## [8.138.0-beta.24] - 2025-08-19
+
+### Added
+- Player changes up to [v8.223.0](https://developer.bitmovin.com/playback/docs/release-notes-web#82230)
+
+### Fixed
+- App crash due to missing `MediaError` class on Kepler
+- Parsing of SMPTE-TT image tags in TTML subtitles
+
 ## [8.138.0-beta.23] - 2025-07-29
 
 ### Added
