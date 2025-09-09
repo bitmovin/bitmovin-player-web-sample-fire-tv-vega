@@ -38,6 +38,11 @@ export const App = () => {
     tweaks: {
       enable_performance_logs: true,
       app_id: 'com.bitmovin.demo.kepler',
+      disable_retry_for_response_status: {
+        'manifest/hls/variant': [403, 404, 416],
+        'media/audio': [400, 401, 403, 404, 416, 422, 500, 501, 502, 503, 504, 510],
+        'media/video': [400, 401, 403, 404, 416, 422, 500, 501, 502, 503, 504, 510],
+      },
     },
   };
 
