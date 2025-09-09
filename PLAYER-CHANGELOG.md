@@ -3,6 +3,14 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
+## [8.138.0-beta.25] - 2025-09-09
+
+### Added
+- Player changes up to [v8.225.0](https://developer.bitmovin.com/playback/docs/release-notes-web#82250)
+
+### Fixed
+- Playback stuck on content transitions (HLS discontinuities or DASH periods) if codecs change
+
 ## [8.138.0-beta.24] - 2025-08-19
 
 ### Added
