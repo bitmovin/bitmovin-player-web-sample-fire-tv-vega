@@ -1,6 +1,10 @@
 import type { SourceConfig } from 'bitmovin-player';
 
 export const Sources: Record<string, SourceConfig> = {
+  slingFailover: {
+    title: 'SlingFailover',
+    // TODO: insert stream here
+  },
   AomDash: {
     title: 'AomDash',
     dash: 'https://cdn.bitmovin.com/content/assets/MI201109210084/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd',

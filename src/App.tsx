@@ -4,11 +4,11 @@
  * PROPRIETARY/CONFIDENTIAL.  USE IS SUBJECT TO LICENSE TERMS.
  */
 
-import React, { useState } from 'react';
 import type { PlayerConfig } from 'bitmovin-player';
-import { Sources } from './Sources';
-import BitmovinPlayer from './BitmovinPlayer';
+import React, { useState } from 'react';
 import { Button, View } from 'react-native';
+import BitmovinPlayer from './BitmovinPlayer';
+import { Sources } from './Sources';
 
 export const App = () => {
   const sources = Object.values(Sources);
