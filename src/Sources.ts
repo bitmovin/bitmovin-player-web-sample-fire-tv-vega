@@ -3,20 +3,20 @@ import type { SourceConfig } from 'bitmovin-player';
 export const Sources: Record<string, SourceConfig> = {
   AomDash: {
     title: 'AomDash',
-    dash: 'https://bitdash-a.akamaihd.net/content/MI201109210084_1/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd',
+    dash: 'https://cdn.bitmovin.com/content/assets/MI201109210084/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd',
   },
   AomHlsFmp4: {
     title: 'AomHlsFmp4',
-    hls: 'https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s-fmp4/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8',
+    hls: 'https://cdn.bitmovin.com/content/assets/MI201109210084/m3u8s-fmp4/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8',
   },
   AomProgressive: {
     title: 'AomProgressive',
     progressive:
-      'https://bitmovin-a.akamaihd.net/content/MI201109210084_1/MI201109210084_mpeg-4_hd_high_1080p25_10mbits.mp4',
+      'https://cdn.bitmovin.com/content/assets/art-of-motion-dash-hls-progressive/MI201109210084_mpeg-4_hd_high_1080p25_10mbits.mp4',
   },
   SintelDash: {
     title: 'SintelDash',
-    dash: 'https://bitmovin-a.akamaihd.net/content/sintel/sintel.mpd',
+    dash: 'https://cdn.bitmovin.com/content/assets/sintel/sintel.mpd',
   },
   ShakaBbbHls: {
     title: 'ShakaBbbHls',
