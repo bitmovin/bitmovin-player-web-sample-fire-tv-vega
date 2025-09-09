@@ -27,6 +27,13 @@ export const App = () => {
       playing: () => console.warn('PLAYING'),
       warning: e => console.warn('WARNING', e),
       error: e => console.warn('ERROR', e),
+      segmentrequestfinished: e => {
+        console.warn('segmentrequestfinished', e);
+
+        if (!(e as any).success) {
+          console.warn('  -> failed request!!!', e);
+        }
+      },
     },
     tweaks: {
       enable_performance_logs: true,
