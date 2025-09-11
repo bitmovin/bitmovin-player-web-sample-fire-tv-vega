@@ -34,17 +34,17 @@ export const App = () => {
     },
   };
 
-  let [currentSourceIndex, setCurrentSourceIndex] = useState<number>(0);
+  let [currentSourceIndex, setCurrentSourceIndex] = useState<number>(-1);
 
   return (
     <View>
       <Button
-        title="SWITCH SOURCE"
+        title="LOAD/SWITCH SOURCE"
         onPress={() => {
           setCurrentSourceIndex((currentSourceIndex + 1) % sources.length);
         }}
       />
-      <BitmovinPlayer config={config} source={sources[currentSourceIndex]} />
+      {sources[currentSourceIndex] && <BitmovinPlayer config={config} source={sources[currentSourceIndex]} />}
     </View>
   );
 };
