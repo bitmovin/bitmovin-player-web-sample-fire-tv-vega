@@ -4,11 +4,16 @@
  * PROPRIETARY/CONFIDENTIAL.  USE IS SUBJECT TO LICENSE TERMS.
  */
 
+import {
+  PlayerEvent,
+  type DownloadFinishedEvent,
+  type PlayerConfig,
+  type VideoDownloadQualityChangeEvent,
+} from 'bitmovin-player/modules/bitmovinplayer-core';
 import React, { useState } from 'react';
-import type { PlayerConfig } from 'bitmovin-player';
-import { Sources } from './Sources';
-import BitmovinPlayer from './BitmovinPlayer';
 import { Button, View } from 'react-native';
+import BitmovinPlayer from './BitmovinPlayer';
+import { Sources } from './Sources';
 
 export const App = () => {
   const sources = Object.values(Sources);
@@ -24,14 +29,45 @@ export const App = () => {
       autoplay: true,
     },
     events: {
-      playing: () => console.warn('PLAYING'),
-      warning: e => console.warn('WARNING', e),
-      error: e => console.warn('ERROR', e),
+      [PlayerEvent.Playing]: () => console.warn('PlayerEvent.Playing'),
+      [PlayerEvent.Warning]: e => console.warn('PlayerEvent.Warning', e),
+      [PlayerEvent.Error]: e => console.warn('PlayerEvent.Error', e),
+      [PlayerEvent.DrmLicenseAdded]: e => console.warn('PlayerEvent.DrmLicenseAdded', e),
+      [PlayerEvent.VideoDownloadQualityChanged]: e => {
+        const { sourceQuality, targetQuality } = e as VideoDownloadQualityChangeEvent;
+        console.warn(
+          `PlayerEvent.VideoDownloadQualityChanged [${sourceQuality?.label}] -> [${targetQuality?.label}]`,
+          e,
+        );
+      },
+      [PlayerEvent.DownloadFinished]: e => {
+        const event: DownloadFinishedEvent = e as DownloadFinishedEvent;
+        console.warn(
+          `PlayerEvent.DownloadFinished ${event.downloadType} ` +
+            `${event.downloadTime} (TTFB=${event.timeToFirstByte.toFixed(2)})` +
+            ` ${event.success ? '' : `FAILED ${event.httpStatus}`}`,
+        );
+      },
     },
     tweaks: {
-      enable_performance_logs: true,
       app_id: 'com.bitmovin.demo.kepler',
+      enable_performance_logs: true,
+      enable_media_element_event_logs: true,
       max_startup_buffer: 1,
+    },
+    network: {
+      preprocessHttpRequest(type, request) {
+        console.warn(`Loading ${type}`, request.url);
+
+        return Promise.resolve(request);
+      },
+      preprocessHttpResponse(type, response) {
+        response.status >= 400
+          ? console.warn(`Error loading ${type}`, response.url, response.status, response.statusText)
+          : console.warn(`Loaded ${type}`, response.url, response.status);
+
+        return Promise.resolve(response);
+      },
     },
   };
 

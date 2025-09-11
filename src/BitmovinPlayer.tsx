@@ -1,17 +1,16 @@
-import type { PlayerAPI, PlayerConfig, SourceConfig, ErrorEvent } from 'bitmovin-player';
+import type { ErrorEvent, PlayerAPI, PlayerConfig, SourceConfig } from 'bitmovin-player';
 import { Player, PlayerEvent } from 'bitmovin-player/modules/bitmovinplayer-core';
 
-import React, { useRef, useState } from 'react';
-import { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import W3CMediaPolyfill from './polyfills/W3CMediaPolyfill';
-import { KeplerVideoSurfaceView, VideoPlayer } from '@amzn/react-native-w3cmedia';
-import { polyfillElementFunctions } from './polyfills/Misc';
-import { WebCryptoPolyfill } from './polyfills/WebCryptoPolyfill';
-import { DOMParserPolyfill } from './polyfills/DOMParserPolyfill';
-import { Base64Polyfill } from './polyfills/Base64Polyfill';
 import type { HWEvent } from '@amzn/react-native-kepler';
 import { useTVEventHandler } from '@amzn/react-native-kepler';
+import { KeplerVideoSurfaceView, VideoPlayer } from '@amzn/react-native-w3cmedia';
+import React, { useEffect, useRef, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Base64Polyfill } from './polyfills/Base64Polyfill';
+import { DOMParserPolyfill } from './polyfills/DOMParserPolyfill';
+import { polyfillElementFunctions } from './polyfills/Misc';
+import W3CMediaPolyfill from './polyfills/W3CMediaPolyfill';
+import { WebCryptoPolyfill } from './polyfills/WebCryptoPolyfill';
 
 /**
  * Note: Due to an issue with the Metro bundler, Player Modules need to be imported using `require`.
@@ -61,29 +60,35 @@ type BitmovinPlayerProps = {
   source: SourceConfig;
 };
 
+const NO_SOURCE_TITLE = 'No source loaded';
+
 const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, source }) => {
   const video = useRef<VideoPlayer | null>(null);
   const player = useRef<PlayerAPI | null>(null);
 
   const [surfaceHandle, setSurfaceHandle] = useState<string | null>(null);
 
-  const [title, setTitle] = useState<string>('No source loaded');
+  const [title, setTitle] = useState<string>(NO_SOURCE_TITLE);
+  const [vstMeasurement, setVstMeasurement] = useState<string>('');
   const [seekTarget, setSeekTarget] = useState<number | null>(null);
 
   useEffect(() => {
     async function setupPlayer(surfaceViewHandle: string) {
+      updateTitle(source, 'loading');
+
+      const tsVideoElementCreation = performance.now();
       // Note: re-using the "video element" is not supported on Kepler, we need a new on for every new source
       video.current = createVideoElement();
       await video.current.initialize();
       video.current.setSurfaceHandle(surfaceViewHandle);
+      console.warn(`[Perf] Video element creation took ${(performance.now() - tsVideoElementCreation).toFixed(2)}ms`);
 
-      updateTitle(source, 'loading');
-
+      const tsPlayerCreation = performance.now();
       player.current = new Player(undefined as any, config);
       global.player = player.current;
+      console.warn(`[Perf] Player creation took ${(performance.now() - tsPlayerCreation).toFixed(2)}ms`);
 
       player.current.on(PlayerEvent.Error, e => {
-        console.warn('Player error', e);
         updateTitle(source, `error: ${(e as ErrorEvent).name}`);
       });
 
@@ -91,9 +96,25 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
         setSeekTarget(null);
       });
 
+      const firstPlayingListener = () => {
+        const vst = (performance.now() - tsVideoElementCreation).toFixed(2);
+        console.warn(`[Perf] Playback started, VST: ${vst}ms`, {
+          timeSince: {
+            tsVideoElementCreation: (performance.now() - tsVideoElementCreation).toFixed(2),
+            tsPlayerCreation: (performance.now() - tsPlayerCreation).toFixed(2),
+            tsSourceLoading: (performance.now() - tsSourceLoading).toFixed(2),
+          },
+        });
+        setVstMeasurement(`VST: ${vst}ms`);
+        player.current?.off(PlayerEvent.Playing, firstPlayingListener);
+      };
+      player.current.on(PlayerEvent.Playing, firstPlayingListener);
+
+      const tsSourceLoading = performance.now();
       player.current.load(source).then(
         () => {
           console.warn('Successfully loaded source');
+          console.warn(`[Perf] Source loading: ${(performance.now() - tsSourceLoading).toFixed(2)}ms`);
           updateTitle(source, 'loaded');
         },
         e => {
@@ -118,6 +139,8 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
         }
         video.current?.deinitialize();
         video.current?.clearSurfaceHandle('');
+        setTitle(NO_SOURCE_TITLE);
+        setVstMeasurement('');
       }
 
       destroyPlayer();
@@ -173,6 +196,7 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
   return (
     <View>
       <Text style={styles.sourceTitle}>{title}</Text>
+      <Text style={styles.vstMeasurement}>{vstMeasurement}</Text>
       <KeplerVideoSurfaceView onSurfaceViewCreated={onSurfaceViewCreated} />
     </View>
   );
@@ -185,6 +209,14 @@ const styles = StyleSheet.create({
     fontSize: 50,
     position: 'absolute',
     top: 20,
+    left: 20,
+  },
+  vstMeasurement: {
+    color: 'white',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    fontSize: 50,
+    position: 'absolute',
+    top: 100,
     left: 20,
   },
 });
