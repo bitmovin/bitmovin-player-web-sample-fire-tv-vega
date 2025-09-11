@@ -31,6 +31,7 @@ export const App = () => {
     tweaks: {
       enable_performance_logs: true,
       app_id: 'com.bitmovin.demo.kepler',
+      max_startup_buffer: 1,
     },
   };
 
