@@ -1,17 +1,16 @@
-import type { PlayerAPI, PlayerConfig, SourceConfig, ErrorEvent } from 'bitmovin-player';
+import type { ErrorEvent, PlayerAPI, PlayerConfig, SourceConfig } from 'bitmovin-player';
 import { Player, PlayerEvent } from 'bitmovin-player/modules/bitmovinplayer-core';
 
-import React, { useRef, useState } from 'react';
-import { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import W3CMediaPolyfill from './polyfills/W3CMediaPolyfill';
-import { KeplerVideoSurfaceView, VideoPlayer } from '@amzn/react-native-w3cmedia';
-import { polyfillElementFunctions } from './polyfills/Misc';
-import { WebCryptoPolyfill } from './polyfills/WebCryptoPolyfill';
-import { DOMParserPolyfill } from './polyfills/DOMParserPolyfill';
-import { Base64Polyfill } from './polyfills/Base64Polyfill';
 import type { HWEvent } from '@amzn/react-native-kepler';
 import { useTVEventHandler } from '@amzn/react-native-kepler';
+import { KeplerVideoSurfaceView, VideoPlayer } from '@amzn/react-native-w3cmedia';
+import React, { useEffect, useRef, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Base64Polyfill } from './polyfills/Base64Polyfill';
+import { DOMParserPolyfill } from './polyfills/DOMParserPolyfill';
+import { polyfillElementFunctions } from './polyfills/Misc';
+import W3CMediaPolyfill from './polyfills/W3CMediaPolyfill';
+import { WebCryptoPolyfill } from './polyfills/WebCryptoPolyfill';
 
 /**
  * Note: Due to an issue with the Metro bundler, Player Modules need to be imported using `require`.
@@ -29,6 +28,8 @@ import ContainerMp4Module = require('bitmovin-player/modules/bitmovinplayer-cont
 import HlsModule = require('bitmovin-player/modules/bitmovinplayer-hls');
 import DrmModule = require('bitmovin-player/modules/bitmovinplayer-drm');
 import CryptoModule = require('bitmovin-player/modules/bitmovinplayer-crypto');
+import SubtitlesModule = require('bitmovin-player/modules/bitmovinplayer-subtitles');
+import SubtitlesTtmlModule = require('bitmovin-player/modules/bitmovinplayer-subtitles-ttml');
 
 W3CMediaPolyfill.install();
 WebCryptoPolyfill.install();
@@ -48,6 +49,8 @@ Player.addModule(ContainerTSModule.default);
 Player.addModule(ContainerMp4Module.default);
 Player.addModule(DrmModule.default);
 Player.addModule(CryptoModule.default);
+Player.addModule(SubtitlesModule.default);
+Player.addModule(SubtitlesTtmlModule.default);
 
 function createVideoElement(): VideoPlayer {
   const video = new VideoPlayer();
@@ -95,6 +98,14 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
         () => {
           console.warn('Successfully loaded source');
           updateTitle(source, 'loaded');
+
+          const textTracks = player.current?.subtitles.list();
+          if (textTracks && textTracks.length > 0) {
+            player.current?.subtitles.enable(textTracks[0].id);
+            player.current?.on(PlayerEvent.CueEnter, event => {
+              console.warn('Subtitle cue entered', event);
+            });
+          }
         },
         e => {
           console.warn('Error while loading source', e);
