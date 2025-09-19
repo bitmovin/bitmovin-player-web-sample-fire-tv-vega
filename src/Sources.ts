@@ -1,6 +1,10 @@
 import type { SourceConfig } from 'bitmovin-player';
 
 export const Sources: Record<string, SourceConfig> = {
+  DashIfTtmlImageSubs: {
+    title: 'DashIfTtmlImageSubs',
+    dash: 'https://livesim2.dashif.org/vod/testpic_2s/img_subs.mpd',
+  },
   AomDash: {
     title: 'AomDash',
     dash: 'https://cdn.bitmovin.com/content/assets/MI201109210084/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd',
