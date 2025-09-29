@@ -3,6 +3,11 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
+## [8.138.0-beta.26] - 2025-09-24
+
+### Fixed
+- Missing `PlaybackFinished` event when reaching end of VOD
+
 ## [8.138.0-beta.25] - 2025-09-09
 
 ### Added
