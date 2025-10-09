@@ -3,6 +3,14 @@
 All changes to the Bitmovin Player that are relevant for Kepler will be documented in this file.
 For the public-facing player changelog please see https://developer.bitmovin.com/playback/docs/release-notes-web
 
+## [8.138.0-beta.27] - 2025-10-09
+
+### Added
+- Player changes up to [v8.228.0](https://developer.bitmovin.com/playback/docs/release-notes-web#82250)
+
+### Fixed
+- Improved parsing and processing efficiency for long HLS playlists
+
 ## [8.138.0-beta.26] - 2025-09-24
 
 ### Fixed
