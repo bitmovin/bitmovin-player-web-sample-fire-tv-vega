@@ -1,17 +1,16 @@
-import type { PlayerAPI, PlayerConfig, SourceConfig, ErrorEvent } from 'bitmovin-player';
+import type { ErrorEvent, PlayerAPI, PlayerConfig, SourceConfig } from 'bitmovin-player';
 import { Player, PlayerEvent } from 'bitmovin-player/modules/bitmovinplayer-core';
 
-import React, { useRef, useState } from 'react';
-import { useEffect } from 'react';
+import type { HWEvent } from '@amazon-devices/react-native-kepler';
+import { useTVEventHandler } from '@amazon-devices/react-native-kepler';
+import { KeplerVideoSurfaceView, VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
+import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import W3CMediaPolyfill from './polyfills/W3CMediaPolyfill';
-import { KeplerVideoSurfaceView, VideoPlayer } from '@amzn/react-native-w3cmedia';
-import { polyfillElementFunctions } from './polyfills/Misc';
-import { WebCryptoPolyfill } from './polyfills/WebCryptoPolyfill';
-import { DOMParserPolyfill } from './polyfills/DOMParserPolyfill';
 import { Base64Polyfill } from './polyfills/Base64Polyfill';
-import type { HWEvent } from '@amzn/react-native-kepler';
-import { useTVEventHandler } from '@amzn/react-native-kepler';
+import { DOMParserPolyfill } from './polyfills/DOMParserPolyfill';
+import { polyfillElementFunctions } from './polyfills/Misc';
+import W3CMediaPolyfill from './polyfills/W3CMediaPolyfill';
+import { WebCryptoPolyfill } from './polyfills/WebCryptoPolyfill';
 
 /**
  * Note: Due to an issue with the Metro bundler, Player Modules need to be imported using `require`.

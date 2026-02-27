@@ -11,11 +11,12 @@
  * IMPLIED, OR STATUTORY, INCLUDING THE IMPLIED WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
  */
-import { requestMediaKeysSystemAccess, MediaSource, HTMLMediaElement } from '@amzn/react-native-w3cmedia';
+import { HTMLMediaElement, MediaSource, requestMediaKeysSystemAccess } from '@amazon-devices/react-native-w3cmedia';
 
 class W3CMediaPolyfill {
   static install() {
     console.log('Installing W3CMedia polyfills');
+
     global.MediaSource = global.MediaSource = MediaSource;
     global.navigator.requestMediaKeySystemAccess = requestMediaKeysSystemAccess;
     global.HTMLMediaElement = HTMLMediaElement;

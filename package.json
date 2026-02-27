@@ -1,5 +1,5 @@
 {
-  "name": "@amzn/bitmovinplayerwebsamplekepler",
+  "name": "bitmovinplayerwebsamplekepler",
   "version": "0.0.1",
   "files": [
     "dist"
@@ -29,8 +29,8 @@
     "app:build": "kepler build && npm run app:install && npm run app:launch"
   },
   "dependencies": {
-    "@amzn/react-native-kepler": "^2.0.1751782280",
-    "@amzn/react-native-w3cmedia": "^2.1.80",
+    "@amazon-devices/react-native-kepler": "^2.0.1758683737",
+    "@amazon-devices/react-native-w3cmedia": "^2.2.20",
     "@xmldom/xmldom": "^0.9.8",
     "base-64": "^1.0.0",
     "bitmovin-player": "8.138.0-beta.27",
@@ -38,7 +38,7 @@
     "react-native": "0.72.0"
   },
   "devDependencies": {
-    "@amzn/kepler-cli-platform": "^0.20.4",
+    "@amazon-devices/kepler-cli-platform": "^0.22.0",
     "@babel/core": "^7.20.0",
     "@babel/runtime": "^7.28.2",
     "@babel/traverse": "7.28.0",

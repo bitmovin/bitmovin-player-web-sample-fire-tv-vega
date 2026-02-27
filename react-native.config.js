@@ -10,7 +10,7 @@ var hostArch = (execSync("uname -a").includes('ARM64')) ? 'aarch64' : 'x86_64';
 
 module.exports = {
   dependencies: {
-    '@amzn/react-native-kepler': {
+    '@amazon-devices/react-native-kepler': {
       platforms: {
         kepler: null, // do not use platform definition from @react-native-kepler
       },
