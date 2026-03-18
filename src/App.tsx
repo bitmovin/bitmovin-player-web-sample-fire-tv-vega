@@ -4,6 +4,7 @@
  * PROPRIETARY/CONFIDENTIAL.  USE IS SUBJECT TO LICENSE TERMS.
  */
 
+import { StyleSheet } from '@amazon-devices/react-native-kepler';
 import type { PlayerConfig } from 'bitmovin-player';
 import React, { useState } from 'react';
 import { Button, View } from 'react-native';
@@ -36,15 +37,28 @@ export const App = () => {
 
   let [currentSourceIndex, setCurrentSourceIndex] = useState<number>(0);
 
+  const styles = StyleSheet.create({
+    controlbar: {
+      padding: 15,
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      backgroundColor: '#111111',
+    },
+  });
+
   return (
     <View>
-      <Button
-        title="SWITCH SOURCE"
-        onPress={() => {
-          setCurrentSourceIndex((currentSourceIndex + 1) % sources.length);
-        }}
-      />
-      <BitmovinPlayer config={config} source={sources[currentSourceIndex]} />
+      <View style={styles.controlbar}>
+        <Button
+          title="PREVIOUS SOURCE"
+          onPress={() => setCurrentSourceIndex((currentSourceIndex - 1) % sources.length)}
+        />
+        <Button title="NEXT SOURCE" onPress={() => setCurrentSourceIndex((currentSourceIndex + 1) % sources.length)} />
+      </View>
+      <View>
+        {sources[currentSourceIndex] && <BitmovinPlayer config={config} source={sources[currentSourceIndex]} />}
+      </View>
     </View>
   );
 };
