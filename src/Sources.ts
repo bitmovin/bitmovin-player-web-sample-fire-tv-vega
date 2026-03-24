@@ -7,7 +7,7 @@ export const Sources: Record<string, SourceConfig> = {
   },
   ShakaAngelOneHls: {
     title: 'ShakaAngelOneHls',
-    hls: 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/playlist_v-0480p-1000k-libx264.mp4.m3u8',
+    hls: 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8',
   },
   AppleBasicHlsTs: {
     title: 'AppleBasicHlsTs',
