@@ -17,10 +17,23 @@ export const Sources: Record<string, SourceConfig> = {
     title: 'AppleAdvancedHlsFmp4',
     hls: 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8',
   },
-  AkamaiBbbDash: {
-    title: 'AkamaiBbbDash',
-    dash: 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd',
+  AxinomTosClearDash: {
+    title: 'AxinomTosClearDash',
+    dash: 'https://media.axprod.net/TestVectors/Cmaf/clear_1080p_h264/manifest.mpd',
   },
+  AxinomTosClearHls: {
+    title: 'AxinomTosClearHls',
+    hls: 'https://media.axprod.net/TestVectors/Cmaf/clear_1080p_h264/manifest.m3u8',
+  },
+  AxinomTosClearHevcDash: {
+    title: 'AxinomTosClearHevcDash',
+    dash: 'https://media.axprod.net/TestVectors/H265/clear_cmaf_1080p_h265/manifest.mpd',
+  },
+  AxinomTosClearHevcHls: {
+    title: 'AxinomTosClearHevcHls',
+    hls: 'https://media.axprod.net/TestVectors/H265/clear_cmaf_1080p_h265/manifest.m3u8',
+  },
+
   AxinomClearKeyDash: {
     title: 'AxinomClearKeyDash',
     dash: 'https://media.axprod.net/TestVectors/v7-MultiDRM-SingleKey/Manifest_1080p_ClearKey.mpd',
