@@ -4,10 +4,9 @@
  * PROPRIETARY/CONFIDENTIAL.  USE IS SUBJECT TO LICENSE TERMS.
  */
 
-import { StyleSheet } from '@amazon-devices/react-native-kepler';
 import type { PlayerConfig } from 'bitmovin-player';
 import React, { useState } from 'react';
-import { Button, View } from 'react-native';
+import { View } from 'react-native';
 import BitmovinPlayer from './BitmovinPlayer';
 import { Sources } from './Sources';
 
@@ -32,30 +31,14 @@ export const App = () => {
     tweaks: {
       enable_performance_logs: true,
       app_id: 'com.bitmovin.demo.kepler',
+      disable_audio_buffer_clearing_on_track_switch: true,
     },
   };
 
-  let [currentSourceIndex, setCurrentSourceIndex] = useState<number>(0);
-
-  const styles = StyleSheet.create({
-    controlbar: {
-      padding: 15,
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      backgroundColor: '#111111',
-    },
-  });
+  let [currentSourceIndex] = useState<number>(0);
 
   return (
     <View>
-      <View style={styles.controlbar}>
-        <Button
-          title="PREVIOUS SOURCE"
-          onPress={() => setCurrentSourceIndex((currentSourceIndex - 1) % sources.length)}
-        />
-        <Button title="NEXT SOURCE" onPress={() => setCurrentSourceIndex((currentSourceIndex + 1) % sources.length)} />
-      </View>
       <View>
         {sources[currentSourceIndex] && <BitmovinPlayer config={config} source={sources[currentSourceIndex]} />}
       </View>

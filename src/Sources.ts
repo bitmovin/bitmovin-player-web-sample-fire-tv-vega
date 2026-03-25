@@ -1,42 +1,46 @@
 import type { SourceConfig } from 'bitmovin-player';
 
 export const Sources: Record<string, SourceConfig> = {
-  ShakaBbbHls: {
-    title: 'ShakaBbbHls',
-    hls: 'https://storage.googleapis.com/shaka-demo-assets/bbb-dark-truths-hls/hls.m3u8',
+  AxinomTosDash: {
+    title: 'AxinomTosDash',
+    dash: 'https://media.axprod.net/TestVectors/Cmaf/clear_1080p_h264/manifest.mpd',
   },
-  ShakaAngelOneHls: {
-    title: 'ShakaAngelOneHls',
-    hls: 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8',
-  },
-  AppleBasicHlsTs: {
-    title: 'AppleBasicHlsTs',
-    hls: 'https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8',
-  },
-  AppleAdvancedHlsFmp4: {
-    title: 'AppleAdvancedHlsFmp4',
-    hls: 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8',
-  },
-  AkamaiBbbDash: {
-    title: 'AkamaiBbbDash',
-    dash: 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd',
-  },
-  AxinomClearKeyDash: {
-    title: 'AxinomClearKeyDash',
-    dash: 'https://media.axprod.net/TestVectors/v7-MultiDRM-SingleKey/Manifest_1080p_ClearKey.mpd',
-    drm: {
-      clearkey: [
-        {
-          key: '166634c675823c235a4a9446fad52e4d',
-          kid: '9eb4050de44b4802932e27d75083e266',
-        },
-      ],
-    },
-  },
-  DashIfLiveSim2s: {
-    title: 'DashIfLiveSim2s',
-    dash: 'https://livesim2.dashif.org/livesim2/utc_head/testpic_2s/Manifest.mpd',
-  },
+  // ShakaBbbHls: {
+  //   title: 'ShakaBbbHls',
+  //   hls: 'https://storage.googleapis.com/shaka-demo-assets/bbb-dark-truths-hls/hls.m3u8',
+  // },
+  // ShakaAngelOneHls: {
+  //   title: 'ShakaAngelOneHls',
+  //   hls: 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8',
+  // },
+  // AppleBasicHlsTs: {
+  //   title: 'AppleBasicHlsTs',
+  //   hls: 'https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8',
+  // },
+  // AppleAdvancedHlsFmp4: {
+  //   title: 'AppleAdvancedHlsFmp4',
+  //   hls: 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8',
+  // },
+  // AkamaiBbbDash: {
+  //   title: 'AkamaiBbbDash',
+  //   dash: 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd',
+  // },
+  // AxinomClearKeyDash: {
+  //   title: 'AxinomClearKeyDash',
+  //   dash: 'https://media.axprod.net/TestVectors/v7-MultiDRM-SingleKey/Manifest_1080p_ClearKey.mpd',
+  //   drm: {
+  //     clearkey: [
+  //       {
+  //         key: '166634c675823c235a4a9446fad52e4d',
+  //         kid: '9eb4050de44b4802932e27d75083e266',
+  //       },
+  //     ],
+  //   },
+  // },
+  // DashIfLiveSim2s: {
+  //   title: 'DashIfLiveSim2s',
+  //   dash: 'https://livesim2.dashif.org/livesim2/utc_head/testpic_2s/Manifest.mpd',
+  // },
 } as const;
 
 export const DrmSources: Record<string, SourceConfig> = {

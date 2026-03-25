@@ -4,8 +4,8 @@ import { Player, PlayerEvent } from 'bitmovin-player/modules/bitmovinplayer-core
 import type { HWEvent } from '@amazon-devices/react-native-kepler';
 import { useTVEventHandler } from '@amazon-devices/react-native-kepler';
 import { KeplerVideoSurfaceView, VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
-import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import { Base64Polyfill } from './polyfills/Base64Polyfill';
 import { DOMParserPolyfill } from './polyfills/DOMParserPolyfill';
 import { polyfillElementFunctions } from './polyfills/Misc';
@@ -94,6 +94,10 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
         () => {
           console.warn('Successfully loaded source');
           updateTitle(source, 'loaded');
+          const currentAudio = player.current?.getAudio();
+          if (currentAudio) {
+            setAudioLabel(`${currentAudio.label} (${currentAudio.lang})`);
+          }
         },
         e => {
           console.warn('Error while loading source', e);
@@ -159,6 +163,20 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
     }
   }, [seekTarget]);
 
+  const [audioLabel, setAudioLabel] = useState<string>('Audio');
+
+  const cycleAudioTrack = useCallback(() => {
+    if (!player.current) return;
+    const available = player.current.getAvailableAudio();
+    if (available.length <= 1) return;
+    const current = player.current.getAudio();
+    const currentIndex = available.findIndex(track => track.id === current?.id);
+    const nextIndex = (currentIndex + 1) % available.length;
+    const next = available[nextIndex];
+    player.current.setAudio(next.id);
+    setAudioLabel(`${next.label} (${next.lang})`);
+  }, []);
+
   const updateTitle = (sourceConfig: SourceConfig, status: string) => {
     setTitle(`${sourceConfig.title ?? '<Untitled>'} [${status}]`);
   };
@@ -171,8 +189,14 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
 
   return (
     <View>
-      <Text style={styles.sourceTitle}>{title}</Text>
-      <KeplerVideoSurfaceView onSurfaceViewCreated={onSurfaceViewCreated} />
+      <View>
+        <KeplerVideoSurfaceView onSurfaceViewCreated={onSurfaceViewCreated} />
+        <Text style={styles.sourceTitle}>{title}</Text>
+        <Text style={styles.audioLabel}>{`Current audio: ${audioLabel}`}</Text>
+      </View>
+      <View style={styles.audioButtonContainer}>
+        <Button title="Switch Audio Track" onPress={cycleAudioTrack} />
+      </View>
     </View>
   );
 };
@@ -184,6 +208,20 @@ const styles = StyleSheet.create({
     fontSize: 50,
     position: 'absolute',
     top: 20,
+    left: 20,
+  },
+  audioButtonContainer: {
+    alignSelf: 'flex-start',
+    position: 'absolute',
+    top: 150,
+    left: 20,
+  },
+  audioLabel: {
+    color: 'white',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    fontSize: 40,
+    position: 'absolute',
+    top: 90,
     left: 20,
   },
 });
