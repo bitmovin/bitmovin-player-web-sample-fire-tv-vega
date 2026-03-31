@@ -1,5 +1,5 @@
 {
-  "name": "bitmovinplayerwebsamplekepler",
+  "name": "bitmovinplayerwebsamplevega",
   "version": "0.0.1",
   "files": [
     "dist"
@@ -62,7 +62,7 @@
   },
   "kepler": {
     "projectType": "application",
-    "appName": "bitmovinplayerwebsamplekepler",
+    "appName": "bitmovinplayerwebsamplevega",
     "targets": [
       "tv"
     ],

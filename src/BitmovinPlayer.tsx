@@ -71,7 +71,7 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
 
   useEffect(() => {
     async function setupPlayer(surfaceViewHandle: string) {
-      // Note: re-using the "video element" is not supported on Kepler, we need a new on for every new source
+      // Note: re-using the "video element" is not supported on Vega, we need a new on for every new source
       video.current = createVideoElement();
       await video.current.initialize();
       video.current.setSurfaceHandle(surfaceViewHandle);
