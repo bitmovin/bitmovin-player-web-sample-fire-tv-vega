@@ -1,80 +1,41 @@
-# player-web-sample-kepler
+# player-web-sample-fire-tv-vega
 
-This repository contains a sample video playback app for Kepler, using the [Bitmovin Player Web SDK](https://bitmovin.com/docs/player/web).
-It can be run on the Kepler simulator as well as physical Kepler devices.
+This repository contains a sample video playback app for Vega OS (formerly Kepler OS) on Amazon Fire TV, using the [Bitmovin Player Web SDK](https://bitmovin.com/docs/player/web).
 
-The sample shall be used as a starting point for integrating the Bitmovin Player into a Kepler app.
+The sample may be used as a starting point for integrating the Bitmovin Player into a Vega app.
 
 ## Prerequisites
 
-- Kepler SDK v0.20 or later
+- Vega SDK v0.21 or later
 - Node.js version according to [.nvmrc](./.nvmrc)
 
 ## Getting started
 
 - Configure the player license key and app ID in [App.tsx](./src/App.tsx)
 - Run `npm run build:app` to verify building the app works
-- Launch the app via [Kepler Studio](https://developer.amazon.com/docs/kepler-tv/build-an-app.html#build-an-app-with-kepler-studio) or Kepler CLI
+- Launch the app via [Vega Studio](https://developer.amazon.com/docs/vega/0.21/setup-extension.html) or [Vega SDK CLI](https://developer.amazon.com/docs/vega/0.21/cli-tools.html)
 
-To extend this app to your use case, please ensure you follow the [Modular Player Best Practices](https://developer.bitmovin.com/playback/docs/getting-started-with-the-modular-player#best-practices)!
+To tailor this app to your use case, please ensure you follow the [Modular Player Best Practices](https://developer.bitmovin.com/playback/docs/getting-started-with-the-modular-player#best-practices)!
 
 ## Debugging
 
-Simply click VS Code's `Run and Debug` to build, install and run the app on the Kepler simulator or a connected Kepler device.
+Use VS Code's `Run and Debug` tools to build, install and run the app on the Vega OS simulator or a connected Vega OS device.
 
 ## Running app manually
 
-See https://developer.amazon.com/docs/kepler-tv/cli-tools.html and https://developer.amazon.com/docs/kepler-tv/kepler-video-app.html#build-the-app
+See https://developer.amazon.com/docs/vega/0.22/cli-tools.html and https://developer.amazon.com/docs/vega/0.22/build-an-app.html#vega-cli-tab
 
 ## Features and Limitations
 
-The application uses a custom Bitmovin Player build that is compatible with the Kepler SDK.
-For player version changes that are purely relevant for Kepler, see [PLAYER-CHANGELOG.md](./PLAYER-CHANGELOG.md).
+The application uses a custom build of the Bitmovin Player that is compatible with Vega OS.
+For player version changes that are specific to running on Vega OS, see [PLAYER-CHANGELOG.md](./PLAYER-CHANGELOG.md).
 
 **Note:** Ensure that you are only using player versions in the form `8.138.0-beta.XX`.
-Other player versions are not yet supported on Kepler. 
-
-This app is in an experimental state and is primarily intended for testing purposes, but it will be updated to include more features and improvements over time.
+Other player versions are currently not supported on Vega OS. 
 
 Known Issues:
-- No Bitmovin Player UI: The [bitmovin-player-ui](https://github.com/bitmovin/bitmovin-player-ui) is not working on Kepler, as Bitmovin UI elements are created as HTML elements
-- No client-side ad support, due to no reusability of the video element on Kepler
-- SSAI support is limited to HLS with the same encryption characteristics across discontinuities, other use cases are currently blocked by a Kepler platform bug
+- No Bitmovin Player UI: The [bitmovin-player-ui](https://github.com/bitmovin/bitmovin-player-ui) is not compatible with Vega OS as it is HTML-based
+- No client-side ad support, due to the lack of video element reusability on Vega OS
+- SSAI support is limited to HLS with the same encryption characteristics across discontinuities, other use cases are currently blocked due to Vega OS API limitations
 - MPEG-TS playback causing higher-than-usual CPU usage
-
-## Migration Guides
-
-### From beta.10 to beta.11
-Starting with player version `8.138.0-beta.11`, a valid player license key is required for Kepler applications.
-This key must be set in the player configuration, along with an `app_id` tweak:
-```ts
-const config = {
-  key: 'YOUR_PLAYER_LICENSE_KEY',
-  tweaks: {
-    app_id: 'com.example.yourapp',
-  },
-};
-```
-
-The license key can be obtained from the [Bitmovin Dashboard](https://bitmovin.com/dashboard).
-The `app_id` follows a reverse dns pattern such as `com.bitmovin.demo.kepler` and is a replacement for the hostname in kepler applications.
-It needs to be allow-listed on the Dashboard for license requests to be successful.
-
-### From beta.6 to beta.7
-Starting with player version `8.138.0-beta.7`, it is required to use the [modular player](https://developer.bitmovin.com/playback/docs/getting-started-web#modular-player-version) for Kepler applications.
-
-1. **Remove** direct player import: `import { Player } from 'bitmovin-player';`
-2. Import `Core` module: `import { Player } from 'bitmovin-player/modules/bitmovinplayer-core';`
-3. Import modules:
-    ```ts
-    import PolyfillModule = require('bitmovin-player/modules/bitmovinplayer-polyfill');
-    import ReactNativeModule = require('bitmovin-player/modules/bitmovinplayer-reactnative');
-    /* ... */
-    ```
-    Note that ES6 import syntax does not work at this time due to an issue with the Metro bundler.
-4. Add modules to player core:
-    ```ts
-    Player.addModule(PolyfillModule.default);
-    Player.addModule(ReactNativeModule.default);
-    /* ... */
-    ```
+- Bitmovin monolith player is not supported on Vega OS, usage of [modular player](https://developer.bitmovin.com/playback/docs/getting-started-with-the-modular-player) is required

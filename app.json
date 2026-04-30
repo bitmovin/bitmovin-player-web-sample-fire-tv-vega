@@ -1,5 +1,5 @@
 {
   "//": "The declared app name must follow this pattern to be KRL-compatible",
-  "name": "com.bitmovin.bitmovinplayerwebsamplekepler.main",
-  "displayName": "Bitmovinplayerwebsamplekepler"
+  "name": "com.bitmovin.bitmovinplayerwebsamplevega.main",
+  "displayName": "Bitmovinplayerwebsamplevega"
 }

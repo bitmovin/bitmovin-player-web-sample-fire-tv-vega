@@ -31,7 +31,7 @@ export const App = () => {
     },
     tweaks: {
       enable_performance_logs: true,
-      app_id: 'com.bitmovin.demo.kepler',
+      app_id: 'com.bitmovin.demo.vega',
     },
   };
 

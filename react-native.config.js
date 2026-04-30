@@ -18,7 +18,7 @@ module.exports = {
   },
   project: {
     kepler: {
-      appName: "BitmovinPlayerWebSampleKepler",
+      appName: "BitmovinPlayerWebSampleVega",
       type: "Application",
       version: 1.1,
       sdkVersion: "0.2",
