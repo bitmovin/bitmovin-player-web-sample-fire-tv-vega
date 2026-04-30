@@ -30,7 +30,7 @@
   "dependencies": {
     "@amazon-devices/react-native-kepler": "^2.0.1758683737",
     "@amazon-devices/react-native-w3cmedia": "^2.2.20",
-    "@xmldom/xmldom": "^0.9.8",
+    "@xmldom/xmldom": "^0.9.10",
     "base-64": "^1.0.0",
     "bitmovin-player": "8.138.0-beta.28",
     "react": "18.2.0",
