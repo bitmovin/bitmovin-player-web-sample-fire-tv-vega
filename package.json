@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@amazon-devices/kepler-cli-platform": "^0.22.0",
-    "@babel/core": "^7.20.0",
+    "@babel/core": "^7.29.6",
     "@babel/runtime": "^7.28.2",
     "@babel/traverse": "7.28.0",
     "@react-native-community/cli": "11.3.2",
