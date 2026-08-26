@@ -10,11 +10,15 @@ title = "Bitmovin Player Sample Application"
 version = "0.1.0"
 id = "com.bitmovin.bitmovinplayerwebsamplevega"
 
+[os.version]
+target = "1.2"
+min = "1.2"
+
 [components]
 
 [[components.interactive]]
 id = "com.bitmovin.bitmovinplayerwebsamplevega.main"
-runtime-module = "/com.amazon.kepler.keplerscript.runtime.loader_2@IKeplerScript_2_0"
+runtime-module = "/com.amazon.kepler.runtime.react_native_kepler_4@IReactNativeKepler_0"
 categories = ["com.amazon.category.main", "com.amazon.category.kepler.media"]
 launch-type = "singleton"
 
@@ -66,3 +70,19 @@ id = "com.amazon.audio.system"
 
 [[wants.service]]
 id = "com.amazon.gipc.uuid.*"
+
+[needs]
+[[needs.module]]
+id = "/com.amazon.vega.os@IVega_1_2"
+
+[[needs.module]]
+id = "/com.amazon.kepler.kepler_media_controls_1@IKeplerMediaControls_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.keplermediadescriptor_1@IKeplermediadescriptor_1"
+
+[[needs.module]]
+id = "/com.amazon.kepler.keplerscript_4@IKeplerScript_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.w3cmedia_2@IW3cmedia_3"

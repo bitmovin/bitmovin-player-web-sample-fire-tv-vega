@@ -7,9 +7,15 @@
 import { StyleSheet } from '@amazon-devices/react-native-kepler';
 import type { PlayerConfig } from 'bitmovin-player';
 import React, { useState } from 'react';
-import { Button, View } from 'react-native';
+import { Button, PixelRatio, View } from 'react-native';
 import BitmovinPlayer from './BitmovinPlayer';
 import { Sources } from './Sources';
+
+/**
+ * Scale factor for style values tuned in physical pixels: a numeric style value is density-independent
+ * and renders at `value × scale` physical pixels, so dividing by it restores the intended size.
+ */
+const scale = PixelRatio.get();
 
 export const App = () => {
   const sources = Object.values(Sources);
@@ -39,7 +45,7 @@ export const App = () => {
 
   const styles = StyleSheet.create({
     controlbar: {
-      padding: 15,
+      padding: 15 / scale,
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',

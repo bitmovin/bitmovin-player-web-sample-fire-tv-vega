@@ -13,6 +13,13 @@
  */
 import { HTMLMediaElement, MediaSource, requestMediaKeysSystemAccess } from '@amazon-devices/react-native-w3cmedia';
 
+declare global {
+  interface Navigator {
+    /** Encrypted Media Extensions entry point, absent from the ambient `Navigator` type. */
+    requestMediaKeySystemAccess: typeof requestMediaKeysSystemAccess;
+  }
+}
+
 class W3CMediaPolyfill {
   static install() {
     console.log('Installing W3CMedia polyfills');

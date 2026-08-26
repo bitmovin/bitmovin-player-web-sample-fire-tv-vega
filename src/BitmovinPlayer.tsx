@@ -5,7 +5,7 @@ import type { HWEvent } from '@amazon-devices/react-native-kepler';
 import { useTVEventHandler } from '@amazon-devices/react-native-kepler';
 import { KeplerVideoSurfaceView, VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { PixelRatio, StyleSheet, Text, View } from 'react-native';
 import { Base64Polyfill } from './polyfills/Base64Polyfill';
 import { DOMParserPolyfill } from './polyfills/DOMParserPolyfill';
 import { polyfillElementFunctions } from './polyfills/Misc';
@@ -124,22 +124,40 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
   }, [source, config, surfaceHandle]);
 
   useTVEventHandler((evt: HWEvent) => {
-    if (evt && evt.eventKeyAction === 0 && player.current) {
-      if (evt.eventType === 'playpause') {
-        if (player.current.isPlaying()) {
-          player.current.pause();
+    const activePlayer = player.current;
+    if (!evt || evt.eventKeyAction !== 0 || !activePlayer) {
+      return;
+    }
+
+    switch (evt.eventType) {
+      case 'playpause':
+        if (activePlayer.isPlaying()) {
+          activePlayer.pause();
         } else {
-          player.current.play();
+          activePlayer.play();
         }
-      } else if (evt.eventType === 'play') {
-        player.current.play();
-      } else if (evt.eventType === 'pause') {
-        player.current.pause();
-      } else if (evt.eventType === 'skip_forward') {
+        break;
+      case 'play':
+        activePlayer.play();
+        break;
+      case 'pause':
+        activePlayer.pause();
+        break;
+      /*
+       * The seek keys arrive under their normalized name on Vega OS 2.0 and above, and under the raw
+       * platform key name on Vega OS 1.3; both forms are matched so seeking works on either version.
+       */
+      case 'skip_forward':
+      case 'fastforward':
+      case 'forward':
         skip(10);
-      } else if (evt.eventType === 'skip_backward') {
+        break;
+      case 'skip_backward':
+      case 'rewind':
         skip(-10);
-      }
+        break;
+      default:
+        break;
     }
   });
 
@@ -177,14 +195,20 @@ const BitmovinPlayer: React.FunctionComponent<BitmovinPlayerProps> = ({ config, 
   );
 };
 
+/**
+ * Scale factor for style values tuned in physical pixels: a numeric style value is density-independent
+ * and renders at `value × scale` physical pixels, so dividing by it restores the intended size.
+ */
+const scale = PixelRatio.get();
+
 const styles = StyleSheet.create({
   sourceTitle: {
     color: 'white',
     backgroundColor: 'rgba(0,0,0,0.5)',
-    fontSize: 50,
+    fontSize: 50 / scale,
     position: 'absolute',
-    top: 20,
-    left: 20,
+    top: 20 / scale,
+    left: 20 / scale,
   },
 });
 
