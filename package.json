@@ -28,8 +28,8 @@
     "app:build": "run-s build:release && npm run app:install && npm run app:launch"
   },
   "dependencies": {
-    "@amazon-devices/react-native-kepler": "^2.0.1758683737",
-    "@amazon-devices/react-native-w3cmedia": "^2.2.20",
+    "@amazon-devices/react-native-kepler": "~2.1.0+rn0.72.0",
+    "@amazon-devices/react-native-w3cmedia": "~2.3.2",
     "@xmldom/xmldom": "^0.9.8",
     "base-64": "^1.0.0",
     "bitmovin-player": "8.138.0-beta.28",
