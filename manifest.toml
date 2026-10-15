@@ -10,6 +10,10 @@ title = "Bitmovin Player Sample Application"
 version = "0.1.0"
 id = "com.bitmovin.bitmovinplayerwebsamplevega"
 
+[os.version]
+min = "1.2"
+target = "1.2"
+
 [components]
 
 [[components.interactive]]
@@ -66,3 +70,7 @@ id = "com.amazon.audio.system"
 
 [[wants.service]]
 id = "com.amazon.gipc.uuid.*"
+
+[needs]
+[[needs.module]]
+id = "/com.amazon.vega.os@IVega_1_2"
