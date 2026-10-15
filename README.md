@@ -6,14 +6,14 @@ The sample may be used as a starting point for integrating the Bitmovin Player i
 
 ## Prerequisites
 
-- Vega SDK v0.21 or later
+- Vega SDK v0.24 or later
 - Node.js version according to [.nvmrc](./.nvmrc)
 
 ## Getting started
 
 - Configure the player license key and app ID in [App.tsx](./src/App.tsx)
 - Run `npm run build:app` to verify building the app works
-- Launch the app via [Vega Studio](https://developer.amazon.com/docs/vega/0.21/setup-extension.html) or [Vega SDK CLI](https://developer.amazon.com/docs/vega/0.21/cli-tools.html)
+- Launch the app via [Vega Studio](https://developer.amazon.com/docs/vega/latest/setup-extension) or [Vega SDK CLI](https://developer.amazon.com/docs/vega/latest/cli-tools)
 
 To tailor this app to your use case, please ensure you follow the [Modular Player Best Practices](https://developer.bitmovin.com/playback/docs/getting-started-with-the-modular-player#best-practices)!
 
@@ -23,7 +23,7 @@ Use VS Code's `Run and Debug` tools to build, install and run the app on the Veg
 
 ## Running app manually
 
-See https://developer.amazon.com/docs/vega/0.22/cli-tools.html and https://developer.amazon.com/docs/vega/0.22/build-an-app.html#vega-cli-tab
+See https://developer.amazon.com/docs/vega/latest/cli-tools and https://developer.amazon.com/docs/vega/latest/build-an-app#vega-cli-tab
 
 ## Features and Limitations
 
